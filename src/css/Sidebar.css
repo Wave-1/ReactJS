@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap');
+.sidebar .menu{
+    color: #FFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    padding-top: 10px;
+    text-align: center;
+}
+
+
+.sidebar .row {
+    background: #394DB5;
+}
+.sidebar .row a:hover{
+    background-color: #04B4FF;
+}

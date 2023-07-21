@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Gravitas+One&display=swap');
+.container-fluid .navbar-brand{
+   color: #FFF;
+   font-family: 'Gravitas One';
+   font-size: 39px;
+   font-style: normal;
+   font-weight: 400;
+   line-height: normal;
+}
+
+.navbar-nav .nav-link img{
+   padding-left: 16px;
+}

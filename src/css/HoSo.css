@@ -1,0 +1,6 @@
+.table>:not(:last-child)>:last-child>*{
+    background-color: #F5EFEF;
+}
+.table-striped>tbody>tr:nth-of-type(odd)>*{
+    background-color: #F5EFEF;    
+}

@@ -1,24 +1,55 @@
-import logo from './logo.svg';
-import './App.css';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import HoSo from './pages/admin/HoSo';
+import QuanLyChamCong from './pages/admin/QuanLyChamCong';
+import Thuong from './pages/admin/Thuong';
+import LichLamViec from './pages/admin/LichLamViec';
+import LienHe from './pages/admin/LienHe';
+import HomeUser from './pages/Home_user';
+import ThongTinNhanVienUser from './pages/user/ThongTinNhanVien';
+import ChamCong from './pages/user/ChamCong';
+import ThuongUser from './pages/user/ThuongUser';
+import LichLamViecUser from './pages/user/LichLamViec';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import LienHeUser from './pages/user/LienHe';
+import HomeAdmin from './pages/Home_admin';
+import Them from './pages/admin/Them';
+import QuanLyChamCongUser from './pages/user/QuanLyChamCongUser';
+import SuaUser from './pages/user/SuaUser';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <ToastContainer theme="colored" position="top-center" />
+    <BrowserRouter>
+        <Routes>
+          <Route path="/admin" element={<HomeAdmin/>}>
+            <Route index element={<HoSo />} />
+            <Route path="HoSo" element={<HoSo/>}/>
+            <Route path="QuanLyChamCong" element={<QuanLyChamCong/>}/>
+            <Route path="Thuong" element={<Thuong/>}/>
+            <Route path="LichLamViec" element={<LichLamViec/>}/>
+            <Route path="LienHe" element={<LienHe/>}/>
+            <Route path="HoSo/Them" element={<Them/>}/>
+          </Route>
+          <Route path="/user" element={<HomeUser/>}>
+            <Route index element={<ChamCong/>} />
+            <Route path="ThongTinNhanVienUser" element={<ThongTinNhanVienUser/>}/>
+            <Route path="QuanLyChamCongUser" element={<QuanLyChamCongUser/>}/>
+            <Route path="ThuongUser" element={<ThuongUser/>}/>
+            <Route path="LichLamViecUser" element={<LichLamViecUser/>}/>
+            <Route path="LienHeUser" element={<LienHeUser/>}/>
+            <Route path="ThongTinNhanVien/SuaUser" element={<SuaUser/>}/>
+          </Route>
+          <Route path="/" element={<Login/>} />
+          <Route path="/login" element={<Login/>} />
+          <Route path="/register" element={<Register/>}/>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
