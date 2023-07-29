@@ -19,34 +19,43 @@ function ChamCong() {
 
 
     class App extends React.Component {
-        constructor(props) {
-            super(props);
-            this.updateDateTime = this.updateDateTime.bind(this);
-
-            this.state = {
-                date: new Date().toLocaleDateString(),
-                time: new Date().toLocaleTimeString()
-            }
-            this.interval = setInterval(this.updateDateTime, 1000);
+      constructor(props) {
+        super(props);
+        this.updateDateTime = this.updateDateTime.bind(this);
+        this._isMounted = false;
+    
+        this.state = {
+          date: new Date().toLocaleDateString(),
+          time: new Date().toLocaleTimeString()
         }
-
-        componentWillUnmount() {
-            clearInterval(this.interval);
+        this.interval = setInterval(this.updateDateTime, 1000);
+      }
+    
+      componentDidMount() {
+        this._isMounted = true;
+      }
+    
+      componentWillUnmount() {
+        clearInterval(this.interval);
+        this._isMounted = false;
+      }
+    
+      updateDateTime() {
+        if (this._isMounted) {
+          this.setState({
+            date: new Date().toLocaleDateString(),
+            time: new Date().toLocaleTimeString()
+          });
         }
-
-        updateDateTime() {
-            this.setState({
-                date: new Date().toLocaleDateString(),
-                time: new Date().toLocaleTimeString()
-            });
-        }
-
-        render() {
-            return (
-                <div>{this.state.date} {this.state.time}</div>
-            );
-        }
+      }
+    
+      render() {
+        return (
+          <div>{this.state.date} {this.state.time}</div>
+        );
+      }
     }
+    
 
     return (
         // <Container fluid>
@@ -71,11 +80,13 @@ function ChamCong() {
         <Container fluid>
         <Row className="d-flex justify-content-center align-items-center">
           <Col md={8} lg={5} xs={12}>
-            <h1 className='text-center mb-5'>Acacia</h1>
+            <h1 className='text-center mb-5 mt-5'>Acacia</h1>
             <Card className="shadow">
               <Card.Body>
                 <div className="mb-3 mt-md-4">
-                  <h2 className="fw-bold mb-5 text-center"><App /></h2>
+                  <Row>
+                    <h2 className="fw-bold mb-5 text-center"><img src={require('../../assets/icon-Dho.png')} alt='imgPlus' style={{ width: '35px' }} /><App /></h2>
+                  </Row>
                   <div className="mb-3">
                     <Form>
                       <div className="d-grid">

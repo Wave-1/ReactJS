@@ -8,7 +8,7 @@ function SuaUser() {
     return (
         <Container fluid>
         <Row className='border-bottom border-dark'>
-            <Col><h2>Thêm Nhân Viên</h2></Col>
+            <Col><h2>Sửa Thông Tin Nhân Viên</h2></Col>
         </Row>
         
         <Form>
@@ -34,20 +34,36 @@ function SuaUser() {
             
           </Row>
           <Row className="mb-3">
-            <Form.Group as={Col} controlId="formGridCity">
-              <Form.Label>Mật khẩu (*)</Form.Label>
-              <Form.Control />
+            <Form.Group controlId="formGridCity">
+              <Form.Label  htmlFor="inputPassword5">Mật khẩu cũ (*)</Form.Label>
+              <Form.Control type="password" id="inputPassword5" aria-describedby="passwordHelpBlock" />
             </Form.Group>
     
-            <Form.Group as={Col} controlId="formGridCity">
-              <Form.Label>Xác nhận mật khẩu (*)  </Form.Label>
-              <Form.Control />
+            <Form.Group controlId="formGridCity">
+              <Form.Label htmlFor="inputPassword5">Nhập mật khẩu mới (*)  </Form.Label>
+              <Form.Control type="password" id="inputPassword5" aria-describedby="passwordHelpBlock" />
+            </Form.Group>
+            <Form.Group controlId="formGridCity">
+              <Form.Label htmlFor="inputPassword5">Nhập lại mật khẩu mới (*)</Form.Label>
+              <Form.Control type="password" id="inputPassword5" aria-describedby="passwordHelpBlock" />
             </Form.Group>
           </Row>
-    
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
+          <Row>
+            <Form.Group as={Col}>
+              <Col sm={{  offset: 10}}>
+                <Button variant="primary" type="submit">
+                  Lưu
+                </Button>
+              </Col>
+            </Form.Group>
+            <Form.Group as={Col}>
+              <Col >
+                <Button  className='bg-danger' variant="primary" type="submit">
+                  Hủy
+                </Button>
+              </Col>
+            </Form.Group>
+          </Row>
         </Form>
         </Container>
       );

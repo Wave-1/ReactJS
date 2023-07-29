@@ -4,13 +4,14 @@ import { toast } from 'react-toastify';
 import{useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import '../css/Login.css';
+import '../apiConfig';
+import bcrypt from 'bcryptjs';
 const Login = () => {
 
 
-  const [manhanvien, setMaNhanVien] = useState('');
-  const [password, setPassword] = useState('');
+  const [EmployeeCode, setEmployeeCode] = useState('');
+  const [Password, setPassword] = useState('');
   const navigate = useNavigate();
-  axios.defaults.baseURL="https://localhost:7143/api/";
 
   useEffect(() => {
     sessionStorage.clear();
@@ -20,19 +21,19 @@ const Login = () => {
         e.preventDefault();
         if (validate()) {
             try{
-            const response = await axios.get('NhanVien/' + manhanvien);
+            const response = await axios.get('Employee/' + EmployeeCode);
             const resp = response.data;
                 if(Object.keys(resp).length === 0) {
                     toast.error('Please enter a valid role');
                 }else{
-                    if(resp.password === password){
-                        if (resp.chucvu === "Admin") {
+                    if(bcrypt.compareSync(Password, resp.password)){
+                        if (resp.role == "Admin") {
                             toast.success('Đăng nhập thành công (Admin)');
-                            sessionStorage.setItem('manhanvien', manhanvien);
+                            sessionStorage.setItem('EmployeeCode', EmployeeCode);
                             navigate('/admin');
                           } else {
                             toast.success('Đăng nhập thành công (User)');
-                            sessionStorage.setItem('manhanvien', manhanvien);
+                            sessionStorage.setItem('EmployeeCode', EmployeeCode);
                             navigate('/user');
                           }
                     }else{
@@ -47,7 +48,7 @@ const Login = () => {
         // await axios.get('Logins/' + role)
         //     .then((response) => {
         //     const users = response.data;
-        //     const user = users.find((user) => user === role && user === password);
+        //     const user = users.find((user) => user === role && user === Password);
         //     if (user) {
         //         if (user.role === 1) {
         //         toast.success('Đăng nhập thành công');
@@ -69,11 +70,11 @@ const Login = () => {
 
     const validate = () =>{
       let result = true;
-      if(manhanvien === "" || manhanvien === null){
+      if(EmployeeCode === "" || EmployeeCode === null){
           result = false;
           toast.warning("Vui lòng nhập tên");
       }
-      if(password === "" || password === null){
+      if(Password === "" || Password === null){
           result = false;
           toast.warning("Vui lòng nhập mật khẩu");
       }
@@ -98,16 +99,16 @@ const Login = () => {
                       <Form.Control
                         placeholder="Nhập tài khoản"
                         className='rounded'
-                        value={manhanvien}
-                        onChange={(e) => setMaNhanVien(e.target.value)}
+                        value={EmployeeCode}
+                        onChange={(e) => setEmployeeCode(e.target.value)}
                       />
                     </Form.Group>
 
                     <Form.Group className="mb-5" controlId="formBasicPassword">
                       <Form.Control
-                        type="password"
+                        type="Password"
                         placeholder="Nhập mật khẩu"
-                        value={password}
+                        value={Password}
                         onChange={(e) => setPassword(e.target.value)}
                       />
                     </Form.Group>
@@ -117,14 +118,14 @@ const Login = () => {
                       </Button>
                     </div>
                   </Form>
-                    <div className="mt-3">
+                    {/* <div className="mt-3">
                       <p className="mb-0  text-center">
                         Không có tài khoản?{" "}
                         <a href="/register" className="text-primary fw-bold">
                           Đăng ký
                         </a>
                       </p>
-                    </div>
+                    </div> */}
                 </div>
               </div>
             </Card.Body>

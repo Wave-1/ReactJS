@@ -2,7 +2,6 @@ import React, {useEffect} from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {Container, Row, Col, Table} from 'react-bootstrap';
-import { Outlet } from 'react-router-dom';
 
 function Them() {
     return (
@@ -58,19 +57,32 @@ function Them() {
           </Form.Group>
           <Row className="mb-3">
             <Form.Group as={Col} controlId="formGridCity">
-              <Form.Label>Mật khẩu (*)</Form.Label>
-              <Form.Control />
+              <Form.Label htmlFor="inputPassword5">Mật khẩu (*)</Form.Label>
+              <Form.Control type="password" id="inputPassword5" aria-describedby="passwordHelpBlock"  />
             </Form.Group>
     
             <Form.Group as={Col} controlId="formGridCity">
-              <Form.Label>Xác nhận mật khẩu (*)  </Form.Label>
-              <Form.Control />
+              <Form.Label htmlFor="inputPassword5">Nhập lại mật khẩu (*)  </Form.Label>
+              <Form.Control type="password" id="inputPassword5" aria-describedby="passwordHelpBlock" />
             </Form.Group>
           </Row>
     
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
+          <Row>
+            <Form.Group as={Col}>
+              <Col sm={{  offset: 10}}>
+                <Button variant="primary" type="submit">
+                  Lưu
+                </Button>
+              </Col>
+            </Form.Group>
+            <Form.Group as={Col}>
+              <Col >
+                <Button  className='bg-danger' variant="primary" type="submit">
+                  Hủy
+                </Button>
+              </Col>
+            </Form.Group>
+          </Row>
         </Form>
         </Container>
       );

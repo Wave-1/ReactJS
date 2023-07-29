@@ -13,11 +13,11 @@ function Navbars() {
 
     const navigate = useNavigate();
         useEffect(() =>{
-        let manhanvien = sessionStorage.getItem('manhanvien');
-        if (manhanvien ==='' || manhanvien === null){
+        let EmployeeCode = sessionStorage.getItem('EmployeeCode');
+        if (EmployeeCode ==='' || EmployeeCode === null){
             navigate('/login');
         }else{
-          displayUsernameUpdate(manhanvien);
+          displayUsernameUpdate(EmployeeCode);
         }
     },[navigate]);
 
