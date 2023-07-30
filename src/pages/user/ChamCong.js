@@ -58,25 +58,6 @@ function ChamCong() {
     
 
     return (
-        // <Container fluid>
-        //     <Row className='d-flex justify-content-center align-items-center'>
-        //         <Col><h2>Acacia</h2></Col>
-        //         <Form>
-        //             <div>
-        //                 <App />
-        //                 {!checkedIn ? (
-        //                     <Button variant="primary" type="button" onClick={handleCheckIn}>
-        //                         Check in
-        //                     </Button>
-        //                 ) : (
-        //                     <Button className='bg-danger' variant="primary" type="button" onClick={handleCheckOut}>
-        //                         Check out
-        //                     </Button>
-        //                 )}
-        //             </div>
-        //         </Form>
-        //     </Row>
-        // </Container>
         <Container fluid>
         <Row className="d-flex justify-content-center align-items-center">
           <Col md={8} lg={5} xs={12}>

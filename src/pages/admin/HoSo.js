@@ -1,8 +1,19 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Table } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import '../../css/HoSo.css';
+import '../../apiConfig';
+import axios from 'axios';
+
 function HoSo() {
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        axios.get('/Employee')
+            .then(response => setData(response.data))
+            .catch(error => console.error(error));
+    }, []);
+
     return (
         <Container fluid>
             <Row className='border-bottom border-dark'>
@@ -22,74 +33,48 @@ function HoSo() {
                             <th>Họ và tên</th>
                             <th>Giới tính</th>
                             <th>Ngày sinh</th>
+                            <th>Số điện thoại</th>
                             <th>Số CCCD</th>
                             <th>Chức vụ</th>
                             <th>Ca làm việc</th>
+                            <th>Ngày tạo</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>BSBS03</td>
-                            <td>Nguyễn Thanh Tâm</td>
-                            <td>Nữ</td>
-                            <td>20/11/2002</td>
-                            <td>023456789</td>
-                            <td>Phục vụ</td>
-                            <td>Chiều, sáng </td>
-                            <td>
-                                <NavLink to='/admin/HoSo/Sua' >
-                                    <img src={require('../../assets/icon-edit-1.png')} alt='imgedit' style={{ width: '35px' }} />
-                                </NavLink>
+                        {data.map(employee => {
+                            const dateOfBirth = new Date(employee.dateOfBirth);
+                            const formattedDateOfBirth = dateOfBirth.toLocaleDateString('vi-VN', { year: 'numeric', month: '2-digit', day: '2-digit' });
+                            const datecreatedAt = new Date(employee.createdAt);
+                            const formattedcreatedAt = datecreatedAt.toLocaleDateString('vi-VN', { year: 'numeric', month: '2-digit', day: '2-digit' });
+                            return (
+                                <tr key={employee.employeeCode}>
+                                    <td>{employee.employeeCode}</td>
+                                    <td>{employee.employeeName}</td>
+                                    <td>{employee.gender}</td>
+                                    <td>{formattedDateOfBirth}</td>
+                                    <td>{employee.phoneNumber}</td>
+                                    <td>{employee.citizenIdentificationCard}</td>
+                                    <td>{employee.role}</td>
+                                    <td>{employee.workShifts}</td>                                   
+                                    <td>{formattedcreatedAt}</td>
+                                    <td>
+                                        <NavLink to='/admin/HoSo/Sua' >
+                                            <img src={require('../../assets/icon-edit-1.png')} alt='imgedit' style={{ width: '35px' }} />
+                                        </NavLink>
 
-                                <NavLink to='/admin/HoSo/Xoa' >
-                                    <img src={require('../../assets/icon-delete-1.png')} alt='imgdelete' style={{ width: '15px' }} />
-                                </NavLink>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>01QL</td>
-                            <td>Nguyễn Minh Anh</td>
-                            <td>Nam</td>
-                            <td>05/04/2000</td>
-                            <td>0715212121</td>
-                            <td>Quản lý</td>
-                            <td>Sáng , chiều</td>
-                            <td>
-                                <NavLink to='/admin/HoSo/Sua' >
-                                    <img src={require('../../assets/icon-edit-1.png')} alt='imgedit' style={{ width: '35px' }} />
-                                </NavLink>
-
-                                <NavLink to='/admin/HoSo/Xoa' >
-                                    <img src={require('../../assets/icon-delete-1.png')} alt='imgdelete' style={{ width: '15px' }} />
-                                </NavLink>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>01QL</td>
-                            <td>Nguyễn Minh Anh</td>
-                            <td>Nam</td>
-                            <td>05/04/2000</td>
-                            <td>0715212121</td>
-                            <td>Quản lý</td>
-                            <td>Sáng , chiều</td>
-                            <td>
-                                <NavLink to='/admin/HoSo/Sua' >
-                                    <img src={require('../../assets/icon-edit-1.png')} alt='imgedit' style={{ width: '35px' }} />
-                                </NavLink>
-
-                                <NavLink to='/admin/HoSo/xoa' >
-                                    <img src={require('../../assets/icon-delete-1.png')} alt='imgdelete' style={{ width: '15px' }} />
-                                </NavLink>
-                            </td>
-                        </tr>
+                                        <NavLink to='/admin/HoSo/Xoa' >
+                                            <img src={require('../../assets/icon-delete-1.png')} alt='imgdelete' style={{ width: '15px' }} />
+                                        </NavLink>
+                                    </td>
+                                </tr>
+                            );
+                        })}
                     </tbody>
                 </Table>
             </Row>
-        </Container>
-    )
+        </Container >
+    );
 }
 
-export default HoSo
+export default HoSo;
