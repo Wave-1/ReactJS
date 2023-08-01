@@ -59,27 +59,7 @@ function Them() {
     const handleCancel = () => {
       navigate('../HoSo');
   };
-  /*const handleDateChange = (event) => {
-    // Chuyển đổi giá trị ngày tháng năm từ chuỗi sang đối tượng Date
-    const date = new Date(event.target.value);
-    // Chuyển đổi đối tượng Date sang chuỗi ISO
-    const isoString = date.toISOString();
-    // Cắt chuỗi ISO để lấy phần ngày tháng năm và thêm giờ, phút, giây mặc định
-    const formattedDateTime = isoString.slice(0, 10) + 'T00:00:00';
-    // Cập nhật giá trị state với giá trị datetime đã được định dạng
-    setDateOfBirth(formattedDateTime);
-  }
-  
-  const handleCardIssueDateChange = (event) => {
-    // Chuyển đổi giá trị ngày tháng năm từ chuỗi sang đối tượng Date
-    const date = new Date(event.target.value);
-    // Chuyển đổi đối tượng Date sang chuỗi ISO
-    const isoString = date.toISOString();
-    // Cắt chuỗi ISO để lấy phần ngày tháng năm và thêm giờ, phút, giây mặc định
-    const formattedDateTime = isoString.slice(0, 10) + 'T00:00:00';
-    // Cập nhật giá trị state với giá trị datetime đã được định dạng
-    setCardIssueDate(formattedDateTime);
-  }*/
+ 
   
     return (
         <Container fluid>
