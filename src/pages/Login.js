@@ -27,13 +27,15 @@ const Login = () => {
                     toast.error('Please enter a valid role');
                 }else{
                     if(bcrypt.compareSync(Password, resp.password)){
-                        if (resp.role == "Admin") {
+                        if (resp.role === "Admin") {
                             toast.success('Đăng nhập thành công (Admin)');
                             sessionStorage.setItem('EmployeeCode', EmployeeCode);
+                            sessionStorage.setItem('userRole', 'Admin');
                             navigate('/admin');
                           } else {
                             toast.success('Đăng nhập thành công (User)');
                             sessionStorage.setItem('EmployeeCode', EmployeeCode);
+                            sessionStorage.setItem('userRole', 'User');
                             navigate('/user');
                           }
                     }else{
@@ -44,28 +46,6 @@ const Login = () => {
                 console.error(err);
             }
         }
-        // if (validate()) {
-        // await axios.get('Logins/' + role)
-        //     .then((response) => {
-        //     const users = response.data;
-        //     const user = users.find((user) => user === role && user === Password);
-        //     if (user) {
-        //         if (user.role === 1) {
-        //         toast.success('Đăng nhập thành công');
-        //         sessionStorage.setItem('role', user.role); 
-        //         navigate("/");
-
-        //         } else {
-        //         navigate("/");
-        //         }
-        //     } else {
-        //         toast.error('Tài khoảng hoặc mật khẩu không tồn tại');
-        //     }
-        //     })
-        //     .catch((error) => {
-        //     console.error('Error:', error);
-        //     });
-        // }
     };
 
     const validate = () =>{
@@ -118,14 +98,6 @@ const Login = () => {
                       </Button>
                     </div>
                   </Form>
-                    {/* <div className="mt-3">
-                      <p className="mb-0  text-center">
-                        Không có tài khoản?{" "}
-                        <a href="/register" className="text-primary fw-bold">
-                          Đăng ký
-                        </a>
-                      </p>
-                    </div> */}
                 </div>
               </div>
             </Card.Body>

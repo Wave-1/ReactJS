@@ -1,16 +1,10 @@
 
-import React, { useEffect, useState } from 'react';
-import {Container, Row, Col, Table} from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
+import React from 'react';
+import {Container, Row, Col} from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import '../../css/HoSo.css';
 function ThongTinNhanVienUser() {
-    const [showPassword, setShowPassword] = useState(false);
-  
-    const handleToggleShowPassword = () => {
-      setShowPassword(!showPassword);
-    };
   
     return (
         <Container fluid>

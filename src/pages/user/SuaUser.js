@@ -2,7 +2,6 @@ import React, {useEffect} from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {Container, Row, Col, Table} from 'react-bootstrap';
-import { Outlet } from 'react-router-dom';
 
 function SuaUser() {
     return (

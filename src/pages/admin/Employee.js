@@ -1,18 +1,46 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Table } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import '../../css/HoSo.css';
 import '../../apiConfig';
 import axios from 'axios';
-
-function HoSo() {
+function Employee() {
     const [data, setData] = useState([]);
-
     useEffect(() => {
-        axios.get('/Employee')
-            .then(response => setData(response.data))
-            .catch(error => console.error(error));
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('/Employee');
+                setData(response.data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchData();
     }, []);
+
+    const handleDelete = async (employeeCode) => {
+        if (window.confirm('Are you sure you want to delete this employee ?')) {
+            try {
+                const response = await axios.delete(`/Employee/${employeeCode}`);
+                console.log(response.data);
+                toast.success('Successfully deleted employee information');
+                const updatedData = data.filter((employee) => employee.employeeCode !== employeeCode);
+                setData(updatedData);
+            } catch (err) {
+                console.error('Error deleting employee:', err);
+                toast.error('Error when deleting employee information !!!');
+            }
+        }
+    };
+
+    const formatDateForInput = (dateString) => {
+        if (!dateString) return ''; // Handle empty date
+        const date = new Date(dateString);
+        const formattedDate = date.toISOString().substr(0, 10); // Get "YYYY-MM-DD" format
+        return formattedDate;
+    };
 
     return (
         <Container fluid>
@@ -22,7 +50,7 @@ function HoSo() {
             <Row xs="auto" className='border-bottom border-dark'>
                 <Col >
                     <img src={require('../../assets/icon-plus.png')} alt='imgPlus' style={{ width: '35px' }} />
-                    <NavLink to='/admin/HoSo/Them/' >Thêm</NavLink>
+                    <NavLink to='/admin/HoSo/CreateEmployee/' >Thêm</NavLink>
                 </Col>
             </Row>
             <Row>
@@ -38,32 +66,30 @@ function HoSo() {
                             <th>Chức vụ</th>
                             <th>Ca làm việc</th>
                             <th>Ngày tạo</th>
+                            <th>Update</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         {data.map(employee => {
-                            const dateOfBirth = new Date(employee.dateOfBirth);
-                            const formattedDateOfBirth = dateOfBirth.toLocaleDateString('vi-VN', { year: 'numeric', month: '2-digit', day: '2-digit' });
-                            const datecreatedAt = new Date(employee.createdAt);
-                            const formattedcreatedAt = datecreatedAt.toLocaleDateString('vi-VN', { year: 'numeric', month: '2-digit', day: '2-digit' });
                             return (
                                 <tr key={employee.employeeCode}>
                                     <td>{employee.employeeCode}</td>
                                     <td>{employee.employeeName}</td>
                                     <td>{employee.gender}</td>
-                                    <td>{formattedDateOfBirth}</td>
+                                    <td>{formatDateForInput(employee.dateOfBirth)}</td>
                                     <td>{employee.phoneNumber}</td>
                                     <td>{employee.citizenIdentificationCard}</td>
                                     <td>{employee.role}</td>
-                                    <td>{employee.workShifts}</td>                                   
-                                    <td>{formattedcreatedAt}</td>
+                                    <td>{employee.workShifts}</td>
+                                    <td>{formatDateForInput(employee.createdAt)}</td>
+                                    <td>{formatDateForInput(employee.updatedAt)}</td>
                                     <td>
-                                        <NavLink to='/admin/HoSo/Sua' >
-                                            <img src={require('../../assets/icon-edit-1.png')} alt='imgedit' style={{ width: '35px' }} />
+                                        <NavLink bg-primary to={`/admin/HoSo/Update/${employee.employeeCode}`} >
+                                            <img src={require('../../assets/icon-edit-1.png')} alt='imgedit' style={{ width: '35px', marginRight: '10px'}} />
                                         </NavLink>
 
-                                        <NavLink to='/admin/HoSo/Xoa' >
+                                        <NavLink onClick={() => handleDelete(employee.employeeCode)}>
                                             <img src={require('../../assets/icon-delete-1.png')} alt='imgdelete' style={{ width: '15px' }} />
                                         </NavLink>
                                     </td>
@@ -77,4 +103,4 @@ function HoSo() {
     );
 }
 
-export default HoSo;
+export default Employee

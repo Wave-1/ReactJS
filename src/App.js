@@ -1,6 +1,6 @@
 import Login from './pages/Login';
 import Register from './pages/Register';
-import HoSo from './pages/admin/HoSo';
+import Employee from './pages/admin/Employee';
 import QuanLyChamCong from './pages/admin/QuanLyChamCong';
 import Thuong from './pages/admin/Thuong';
 import LichLamViec from './pages/admin/LichLamViec';
@@ -16,7 +16,8 @@ import { ToastContainer } from 'react-toastify';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LienHeUser from './pages/user/LienHe';
 import HomeAdmin from './pages/Home_admin';
-import Them from './pages/admin/Them';
+import CreateEmployee from './pages/admin/CreateEmployee';
+import UpdateEmployee from './pages/admin/UpdateEmployee';
 import QuanLyChamCongUser from './pages/user/QuanLyChamCongUser';
 import SuaUser from './pages/user/SuaUser';
 
@@ -27,13 +28,14 @@ function App() {
     <BrowserRouter>
         <Routes>
           <Route path="/admin" element={<HomeAdmin/>}>
-            <Route index element={<HoSo />} />
-            <Route path="HoSo" element={<HoSo/>}/>
+            <Route index element={<Employee/>} />
+            <Route path="Employee" element={<Employee/>}/>
             <Route path="QuanLyChamCong" element={<QuanLyChamCong/>}/>
             <Route path="Thuong" element={<Thuong/>}/>
             <Route path="LichLamViec" element={<LichLamViec/>}/>
             <Route path="LienHe" element={<LienHe/>}/>
-            <Route path="HoSo/Them" element={<Them/>}/>
+            <Route path="HoSo/CreateEmployee" element={<CreateEmployee/>}/>
+            <Route path="HoSo/Update/:employeeCode" element={<UpdateEmployee/>}/>
           </Route>
           <Route path="/user" element={<HomeUser/>}>
             <Route index element={<ChamCong/>} />
