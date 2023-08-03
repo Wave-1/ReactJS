@@ -50,7 +50,7 @@ function Employee() {
             <Row xs="auto" className='border-bottom border-dark'>
                 <Col >
                     <img src={require('../../assets/icon-plus.png')} alt='imgPlus' style={{ width: '35px' }} />
-                    <NavLink to='/admin/HoSo/CreateEmployee/' >Thêm</NavLink>
+                    <NavLink to='/admin/HoSo/Create/' >Thêm</NavLink>
                 </Col>
             </Row>
             <Row>
@@ -85,7 +85,7 @@ function Employee() {
                                     <td>{formatDateForInput(employee.createdAt)}</td>
                                     <td>{formatDateForInput(employee.updatedAt)}</td>
                                     <td>
-                                        <NavLink bg-primary to={`/admin/HoSo/Update/${employee.employeeCode}`} >
+                                        <NavLink to={`/admin/HoSo/Update/${employee.employeeCode}`} >
                                             <img src={require('../../assets/icon-edit-1.png')} alt='imgedit' style={{ width: '35px', marginRight: '10px'}} />
                                         </NavLink>
 

@@ -3,9 +3,13 @@ import { Route, Routes } from 'react-router-dom';
 import HomeAdmin from '../pages/Home_admin';
 import HomeUser from '../pages/Home_user';
 import Employee from '../pages/admin/Employee';
-import QuanLyChamCong from '../pages/admin/QuanLyChamCong';
-import Thuong from '../pages/admin/Thuong';
-import LichLamViec from '../pages/admin/LichLamViec';
+import TimeAttendanceManagement from '../pages/admin/TimeAttendanceManagement';
+import CreateTimeAttendanceManagement from '../pages/admin/CreateTimeAttendanceManagement';
+import UpdateTimeAttendanceManagement from '../pages/admin/UpdateTimeAttendanceManagement';
+import SalaryBonus from '../pages/admin/SalaryBonus';
+import WorkSchedule from '../pages/admin/WorkSchedule';
+import CreateWorkSchedule from '../pages/admin/CreateWorkSchedule';
+import UpdateWorkSchedule from '../pages/admin/UpdateWorkSchedule';
 import LienHe from '../pages/admin/LienHe';
 import CreateEmployee from '../pages/admin/CreateEmployee';
 import UpdateEmployee from '../pages/admin/UpdateEmployee';
@@ -23,11 +27,15 @@ export const AdminRoutes = () => (
     <Route path="/" element={<HomeAdmin />}>
       <Route index element={<Employee />} />
       <Route path="Employee" element={<Employee />} />
-      <Route path="QuanLyChamCong" element={<QuanLyChamCong />} />
-      <Route path="Thuong" element={<Thuong />} />
-      <Route path="LichLamViec" element={<LichLamViec />} />
+      <Route path="TimeAttendanceManagement" element={<TimeAttendanceManagement/>} />
+      <Route path="TimeAttendanceManagement/Create" element={<CreateTimeAttendanceManagement/>}/>
+      <Route path="TimeAttendanceManagement/Update/:id" element={<UpdateTimeAttendanceManagement/>} />
+      <Route path="SalaryBonus" element={<SalaryBonus/>} />
+      <Route path="WorkSchedule" element={<WorkSchedule/>} />
+      <Route path="WorkSchedule/Create" element={<CreateWorkSchedule/>} />
+      <Route path="WorkSchedule/Update/:id" element={<UpdateWorkSchedule/>} />
       <Route path="LienHe" element={<LienHe />} />
-      <Route path="HoSo/CreateEmployee" element={<CreateEmployee />} />
+      <Route path="HoSo/Create" element={<CreateEmployee />} />
       <Route path="HoSo/Update/:employeeCode" element={<UpdateEmployee />} />
     </Route>
   </Routes>

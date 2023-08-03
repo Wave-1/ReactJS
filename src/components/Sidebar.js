@@ -17,13 +17,13 @@ const Sidebar = () => {
                 <Nav.Link href='/admin/Employee' className='text-white border-bottom border-dark'>Thông tin nhân viên</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-                <Nav.Link href='/admin/QuanLyChamCong' className='text-white border-bottom border-dark'>Quản lý chấm công</Nav.Link>
+                <Nav.Link href='/admin/TimeAttendanceManagement' className='text-white border-bottom border-dark'>Time Attendance Management</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-                <Nav.Link href='/admin/Thuong' className='text-white border-bottom border-dark'>Thưởng</Nav.Link>
+                <Nav.Link href='/admin/SalaryBonus' className='text-white border-bottom border-dark'>Salary Bonus</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-                <Nav.Link href='/admin/LichLamViec' className='text-white border-bottom border-dark'>Lich làm việc</Nav.Link>
+                <Nav.Link href='/admin/WorkSchedule' className='text-white border-bottom border-dark'>Work Schedule</Nav.Link>
             </Nav.Item>
             <Nav.Item>
                 <Nav.Link href='/admin/LienHe' className='text-white'>Liên hệ</Nav.Link>
