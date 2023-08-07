@@ -6,19 +6,25 @@ import '../../apiConfig';
 import axios from 'axios';
 function UserTimeAttendanceManagement() {
     const [data, setData] = useState([]);
-    const loggedInEmployeeCode = sessionStorage.getItem('EmployeeCode');
+    const EmployeeCode = sessionStorage.getItem('EmployeeCode');
+
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         try {
+    //             const response = await axios.get(`/TimeAttendanceManagement/${EmployeeCode}`);
+    //             setData(response.data);
+    //         } catch (error) {
+    //             console.log(error);
+    //         }
+    //     };
+    //     fetchData();
+    // }, [EmployeeCode]);
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get(`/TimeAttendanceManagement/${loggedInEmployeeCode}`);
-                setData(response.data);
-            } catch (error) {
-                console.log(error);
-            }
-        };
-        fetchData();
-    }, [loggedInEmployeeCode]);
+        axios.get(`/TimeAttendanceManagement?employeeCode=${EmployeeCode}`)
+          .then(response => setData(response.data))
+          .catch(error => console.error(error));
+      }, []);
 
     return (
         <Container fluid>
