@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 import { toast } from 'react-toastify'
 import '../../css/HoSo.css';
 import axios from 'axios';
+
 function WorkSchedule() {
 
     const [data, setData] = useState([]);
@@ -23,9 +24,13 @@ function WorkSchedule() {
     const formatDateForInput = (dateString) => {
         if (!dateString) return ''; // Handle empty date
         const date = new Date(dateString);
-        const formattedDate = date.toISOString().substr(0, 10); // Get "YYYY-MM-DD" format
+        
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const formattedDate = `${year}-${month}-${day}`;
         return formattedDate;
-    };
+      };
 
     const handleDelete = async (id) => {
         if (window.confirm('Are you sure you want to delete this Work Schedule ?')) {

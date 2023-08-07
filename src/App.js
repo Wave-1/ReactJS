@@ -6,7 +6,6 @@ import { ToastContainer } from 'react-toastify';
 import { BrowserRouter } from 'react-router-dom';
 import { AdminRoutes, UserRoutes } from './components/routes';
 import Login from './pages/Login';
-import Register from './pages/Register';
 
 function App() {
   return (
@@ -18,7 +17,6 @@ function App() {
           <Route path="/user/*" element={<UserRoutes />} />
           <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -13,12 +13,12 @@ import UpdateWorkSchedule from '../pages/admin/UpdateWorkSchedule';
 import LienHe from '../pages/admin/LienHe';
 import CreateEmployee from '../pages/admin/CreateEmployee';
 import UpdateEmployee from '../pages/admin/UpdateEmployee';
+import TimeAttendance from '../pages/user/TimeAttendance';
 import ThongTinNhanVienUser from '../pages/user/ThongTinNhanVien';
-import ChamCong from '../pages/user/ChamCong';
+import UserTimeAttendanceManagement from '../pages/user/UserTimeAttendanceManagement';
 import ThuongUser from '../pages/user/ThuongUser';
 import LichLamViecUser from '../pages/user/LichLamViec';
 import LienHeUser from '../pages/user/LienHe';
-import QuanLyChamCongUser from '../pages/user/QuanLyChamCongUser';
 import SuaUser from '../pages/user/SuaUser';
 
 
@@ -44,9 +44,9 @@ export const AdminRoutes = () => (
 export const UserRoutes = () => (
   <Routes>
     <Route path="/" element={<HomeUser />}>
-      <Route index element={<ChamCong />} />
+      <Route index element={<TimeAttendance/>} />
       <Route path="ThongTinNhanVienUser" element={<ThongTinNhanVienUser />} />
-      <Route path="QuanLyChamCongUser" element={<QuanLyChamCongUser />} />
+      <Route path="TimeAttendanceManagement" element={<UserTimeAttendanceManagement />} />
       <Route path="ThuongUser" element={<ThuongUser />} />
       <Route path="LichLamViecUser" element={<LichLamViecUser />} />
       <Route path="LienHeUser" element={<LienHeUser />} />

@@ -17,7 +17,7 @@ const Sidebar_user = () => {
                 <Nav.Link href='/user/ThongTinNhanVienUser' className='text-white border-bottom border-dark'>Thông tin nhân viên</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-                <Nav.Link href='/user/QuanLyChamCongUser' className='text-white border-bottom border-dark'>Quản Lý Chấm công</Nav.Link>
+                <Nav.Link href='/user/TimeAttendanceManagement' className='text-white border-bottom border-dark'>Time Attendance Management</Nav.Link>
             </Nav.Item>
             <Nav.Item>
                 <Nav.Link href='/user/ThuongUser' className='text-white border-bottom border-dark'>Thưởng</Nav.Link>

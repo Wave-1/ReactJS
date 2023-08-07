@@ -38,9 +38,13 @@ function Employee() {
     const formatDateForInput = (dateString) => {
         if (!dateString) return ''; // Handle empty date
         const date = new Date(dateString);
-        const formattedDate = date.toISOString().substr(0, 10); // Get "YYYY-MM-DD" format
+        
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const formattedDate = `${year}-${month}-${day}`;
         return formattedDate;
-    };
+      };
 
     return (
         <Container fluid>

@@ -1,7 +1,7 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import {Container, Row, Col, Table} from 'react-bootstrap';
+import {Container, Row, Col} from 'react-bootstrap';
 
 function SuaUser() {
     return (

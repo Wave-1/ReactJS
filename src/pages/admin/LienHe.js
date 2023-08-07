@@ -1,6 +1,5 @@
 import React from 'react'
 import {Container, Row, Col, Table} from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
 import '../../css/HoSo.css';
 function LienHe() {
     return(

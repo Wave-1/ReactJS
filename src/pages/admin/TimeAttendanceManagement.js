@@ -22,9 +22,14 @@ function TimeAttendanceManagement() {
     const formatDateForInput = (dateString) => {
         if (!dateString) return ''; // Handle empty date
         const date = new Date(dateString);
-        const formattedDate = date.toISOString().substr(0, 10); // Get "YYYY-MM-DD" format
+        
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const formattedDate = `${year}-${month}-${day}`;
         return formattedDate;
-    };
+      };
+      
 
     const handleDelete = async (id) => {
         if (window.confirm('Are you sure you want to delete this Time Attendance Management ?')) {
@@ -60,7 +65,6 @@ function TimeAttendanceManagement() {
                         <th>Check in</th>
                         <th>Check out</th>
                         <th>Working day</th>
-                        <th>Work shifts</th>
                         <th>Created at</th>
                         <th>Updated at</th>
                         <th>Actions</th>
@@ -68,13 +72,14 @@ function TimeAttendanceManagement() {
                 </thead>
                 <tbody>
                     {data.map(i => {
+                        //  const workingDay = new Date(i.workingDay);
+                        //  const formatworkingDay = workingDay.toLocaleDateString('vi-VN', { year: 'numeric', month: '2-digit', day: '2-digit' });
                         return(
                             <tr key = {i.id}>
                                 <td>{i.employeeCode}</td>
                                 <td>{i.checkIn}</td>
                                 <td>{i.checkOut}</td>
                                 <td>{formatDateForInput(i.workingDay)}</td>
-                                <td>{i.workShifts}</td>
                                 <td>{formatDateForInput(i.createdAt)}</td>
                                 <td>{formatDateForInput(i.updatedAt)}</td>
                                 <td>

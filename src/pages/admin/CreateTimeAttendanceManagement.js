@@ -41,8 +41,6 @@ function CreateTimeAttendanceManagement() {
         try {
             const newTimeAttendanceManagementData = {
                 employeeCode: data.employeeCode,
-                checkIn: data.checkIn,
-                checkOut: data.checkOut,
                 workingDay: data.workingDay,
                 workShifts: data.workShifts,
                 createdAt: new Date(),
@@ -94,7 +92,6 @@ function CreateTimeAttendanceManagement() {
                             name="checkIn"
                             value={data?.checkIn}
                             onChange={handleChange}
-                            required
                         />
                     </Form.Group>
                     <Form.Group as={Col} controlId="checkOut">
@@ -104,7 +101,6 @@ function CreateTimeAttendanceManagement() {
                             name="checkOut"
                             value={data?.checkOut}
                             onChange={handleChange}
-                            required
                         />
                     </Form.Group>
                 </Row>
