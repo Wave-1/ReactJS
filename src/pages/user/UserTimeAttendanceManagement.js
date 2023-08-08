@@ -7,7 +7,6 @@ import axios from 'axios';
 function UserTimeAttendanceManagement() {
     const [data, setData] = useState([]);
     const loggedInEmployeeCode = sessionStorage.getItem('EmployeeCode');
-
     useEffect(() => {
         const fetchData = async () => {
             try {
