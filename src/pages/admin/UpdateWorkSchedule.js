@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import '../../apiConfig';
+import { API_BASE_URL, API_HEADERS } from '../../apiConfig';
 import axios from 'axios';
 
 import '../../css/HoSo.css';
@@ -37,7 +37,9 @@ function UpdateWorkSchedule() {
 
     useEffect(() => {
         axios
-            .get(`/WorkSchedule/${id}`)
+            .get(`${API_BASE_URL}WorkSchedule/${id}`,{
+                headers: API_HEADERS
+            })
             .then((res) => setData(res.data))
             .catch((err) => console.log(err));
     }, [id]);
@@ -60,7 +62,11 @@ function UpdateWorkSchedule() {
                 workingDay: data.workingDay,
                 updatedAt: new Date()
             };
-            const response = await axios.put(`/WorkSchedule/${id}`, newWorkScheduleData);
+            const response = await axios.put(
+                `${API_BASE_URL}WorkSchedule/${id}`, 
+                newWorkScheduleData,
+                { headers: API_HEADERS }
+                );
 
             console.log('Response:', response.data);
             toast.success('Successfully updated Work Schedule');

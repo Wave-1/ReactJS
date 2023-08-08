@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import '../../apiConfig';
+import { API_BASE_URL, API_HEADERS } from '../../apiConfig';
 import axios from 'axios';
 
 import '../../css/HoSo.css';
@@ -38,7 +38,8 @@ function UpdateTimeAttendanceManagement() {
 
     useEffect(() => {
         axios
-            .get(`/TimeAttendanceManagement/${id}`)
+            .get( `${API_BASE_URL}TimeAttendanceManagement/${id}`, 
+                { headers: API_HEADERS })
             .then((res) => setData(res.data))
             .catch((err) => console.log(err));
     }, [id]);
@@ -58,10 +59,13 @@ function UpdateTimeAttendanceManagement() {
                 checkIn: data.checkIn,
                 checkOut: data.checkOut,
                 workingDay: data.workingDay,
-                workShifts: data.workShifts,
                 updatedAt: new Date()
             };
-            const response = await axios.put(`/TimeAttendanceManagement/${id}`, newTimeAttendanceManagementData);
+            const response = await axios.put(
+                `${API_BASE_URL}TimeAttendanceManagement/${id}`, 
+                newTimeAttendanceManagementData,
+                { headers: API_HEADERS }
+                );
 
             console.log('Response:', response.data);
             toast.success('Successfully updated Time Attendance Manager');
@@ -129,16 +133,6 @@ function UpdateTimeAttendanceManagement() {
                             type="date"
                             name="workingDay"
                             value={formatDateForInput(data?.workingDay)}
-                            onChange={handleChange}
-                            required
-                        />
-                    </Form.Group>
-                    <Form.Group as={Col} controlId="workShifts">
-                        <Form.Label>Work shifts</Form.Label>
-                        <Form.Control
-                            type="text"
-                            name="workShifts"
-                            value={data?.workShifts}
                             onChange={handleChange}
                             required
                         />

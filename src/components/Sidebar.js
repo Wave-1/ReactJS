@@ -14,7 +14,7 @@ const Sidebar = () => {
                 <p>Menu</p>
             </div>
             <Nav.Item>
-                <Nav.Link href='/admin/Employee' className='text-white border-bottom border-dark'>Thông tin nhân viên</Nav.Link>
+                <Nav.Link href='/admin/Employee' className='text-white border-bottom border-dark'>List Of Employee</Nav.Link>
             </Nav.Item>
             <Nav.Item>
                 <Nav.Link href='/admin/TimeAttendanceManagement' className='text-white border-bottom border-dark'>Time Attendance Management</Nav.Link>

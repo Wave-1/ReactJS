@@ -4,13 +4,17 @@ import { NavLink } from 'react-router-dom';
 import '../../css/HoSo.css';
 import { useState,useEffect } from 'react';
 import { toast } from 'react-toastify'
+import { API_BASE_URL, API_ROUTES, API_HEADERS } from '../../apiConfig';
 import axios from 'axios';
+
 function TimeAttendanceManagement() {
     const [data, setData] = useState([]);
     useEffect(() =>{
         const fetchData = async() => {
             try{
-                const response = await axios.get('/TimeAttendanceManagement');
+                const response = await axios.get(API_BASE_URL + API_ROUTES.TimeAttendanceManagement, {
+                    headers: API_HEADERS
+                });
                 setData(response.data);
             }catch(error){
                 console.log(error);
@@ -34,7 +38,9 @@ function TimeAttendanceManagement() {
     const handleDelete = async (id) => {
         if (window.confirm('Are you sure you want to delete this Time Attendance Management ?')) {
             try {
-                const response = await axios.delete(`/TimeAttendanceManagement/${id}`);
+                const response = await axios.delete(API_BASE_URL + `TimeAttendanceManagement/${id}`, {
+                    headers: API_HEADERS
+                });
                 console.log(response.data);
                 toast.success('Successfully deleted Time Attendance Management');
                 const updatedData = data.filter((i) => i.id !== id);

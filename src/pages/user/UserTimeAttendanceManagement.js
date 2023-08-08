@@ -2,7 +2,7 @@ import React,{useEffect, useState} from 'react'
 import {Container, Row, Col, Table} from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import '../../css/HoSo.css';
-import '../../apiConfig';
+import { API_BASE_URL, API_ROUTES, API_HEADERS } from '../../apiConfig';
 import axios from 'axios';
 function UserTimeAttendanceManagement() {
     const [data, setData] = useState([]);
@@ -11,7 +11,10 @@ function UserTimeAttendanceManagement() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`/TimeAttendanceManagement/${loggedInEmployeeCode}`);
+                const response = await axios.get(`
+                ${API_BASE_URL}${API_ROUTES.TimeAttendanceManagement}?employeeCode=${loggedInEmployeeCode}`,
+                { headers: API_HEADERS }
+                );
                 setData(response.data);
             } catch (error) {
                 console.log(error);
@@ -29,7 +32,7 @@ function UserTimeAttendanceManagement() {
                 <Table striped bordered hover >
                 <thead>
                     <tr>
-                    <th>Employee code</th>
+                        <th>Employee code</th>
                         <th>Check in</th>
                         <th>Check out</th>
                         <th>Working day</th>

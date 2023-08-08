@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import '../../apiConfig';
+import { API_BASE_URL, API_ROUTES, API_HEADERS } from '../../apiConfig';
 import axios from 'axios';
 
 import '../../css/HoSo.css';
 
 function CreateEmployee() {
-    
+
     const navigate = useNavigate();
     const [data, setData] = useState({
         employeeCode: '',
@@ -32,13 +32,13 @@ function CreateEmployee() {
     const formatDateForInput = (dateString) => {
         if (!dateString) return ''; // Handle empty date
         const date = new Date(dateString);
-        
+
         const year = date.getFullYear();
         const month = String(date.getMonth() + 1).padStart(2, '0');
         const day = String(date.getDate()).padStart(2, '0');
         const formattedDate = `${year}-${month}-${day}`;
         return formattedDate;
-      };
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -61,7 +61,9 @@ function CreateEmployee() {
                 createdAt: new Date(),
                 updatedAt: new Date()
             };
-            const response = await axios.post('/Employee', newEmployeeData);
+            const response = await axios.post(API_BASE_URL + API_ROUTES.EMPLOYEE, newEmployeeData, {
+                headers: API_HEADERS
+              });
 
             console.log('Response:', response.data);
             toast.success('Successfully added employees');
@@ -74,33 +76,32 @@ function CreateEmployee() {
 
 
     const handleCancel = () => {
-        if(window.confirm('Are you sure you want to cancel ?')) {
+        if (window.confirm('Are you sure you want to cancel ?')) {
             navigate('../Employee');
         }
     };
-  
+
     return (
         <Container fluid>
             <Row className='border-bottom border-dark'>
                 <Col>
-                    <h2>Chỉnh Sửa Thông Tin Nhân Viên</h2>
+                    <h2>Update Employee</h2>
                 </Col>
             </Row>
 
             <Form onSubmit={handleSubmit}>
                 <Row className="mb-3">
                     <Form.Group className="mb-3" controlId="employeeCode">
-                        <Form.Label>Mã nhân viên (*)</Form.Label>
+                        <Form.Label>Employee Code(*)</Form.Label>
                         <Form.Control
                             type="text"
                             name="employeeCode"
                             value={data.employeeCode}
                             onChange={handleChange}
-                            required
                         />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="employeeName">
-                        <Form.Label>Tên nhân viên (*)</Form.Label>
+                        <Form.Label>Employee Name (*)</Form.Label>
                         <Form.Control
                             type="text"
                             name="employeeName"
@@ -111,19 +112,19 @@ function CreateEmployee() {
                     </Form.Group>
 
                     <Form.Group as={Col} controlId="gender">
-                        <Form.Label>Giới tính</Form.Label>
+                        <Form.Label>Gender</Form.Label>
                         <Form.Select
                             name="gender"
                             value={data.gender}
                             onChange={handleChange}
                         >
-                            <option value="Không xác định">Không xác định</option>
-                            <option value="Nam">Nam</option>
-                            <option value="Nữ">Nữ</option>
+                            <option value="Other">Other</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
                         </Form.Select>
                     </Form.Group>
                     <Form.Group as={Col} controlId='dateOfBirth'>
-                        <Form.Label>Ngày sinh</Form.Label>
+                        <Form.Label>Date Of Birth</Form.Label>
                         <Form.Control
                             type="date"
                             name="dateOfBirth"
@@ -135,7 +136,7 @@ function CreateEmployee() {
                 </Row>
                 <Row>
                     <Form.Group as={Col} className="mb-3" controlId="citizenIdentificationCard">
-                        <Form.Label>Số CCCD</Form.Label>
+                        <Form.Label>Citizen Identification </Form.Label>
                         <Form.Control
                             type="text"
                             name="citizenIdentificationCard"
@@ -145,7 +146,7 @@ function CreateEmployee() {
                         />
                     </Form.Group>
                     <Form.Group as={Col} controlId="cardIssueDate">
-                        <Form.Label>Ngày cấp</Form.Label>
+                        <Form.Label>Card Issue Date</Form.Label>
                         <Form.Control
                             type="date"
                             name="cardIssueDate"
@@ -156,7 +157,7 @@ function CreateEmployee() {
                     </Form.Group>
                 </Row>
                 <Form.Group className="mb-3" controlId="phoneNumber">
-                    <Form.Label>Số điện thoại</Form.Label>
+                    <Form.Label>Phone Number</Form.Label>
                     <Form.Control
                         type="text"
                         name="phoneNumber"
@@ -166,7 +167,7 @@ function CreateEmployee() {
                     />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="role">
-                    <Form.Label>Chức vụ</Form.Label>
+                    <Form.Label>Role</Form.Label>
                     <Form.Control
                         type="text"
                         name="role"
@@ -177,7 +178,7 @@ function CreateEmployee() {
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="workShifts">
-                    <Form.Label>Ca làm việc</Form.Label>
+                    <Form.Label>Work Shifts</Form.Label>
                     <Form.Control
                         type="text"
                         name="workShifts"

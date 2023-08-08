@@ -4,6 +4,7 @@ import {Container, Row, Col, Table} from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import { toast } from 'react-toastify'
 import '../../css/HoSo.css';
+import { API_BASE_URL, API_ROUTES, API_HEADERS } from '../../apiConfig';
 import axios from 'axios';
 
 function WorkSchedule() {
@@ -12,7 +13,10 @@ function WorkSchedule() {
     useEffect(() =>{
         const fetchData = async() =>{
             try{
-                const response = await axios.get('/WorkSchedule');
+                const response = await axios.get(
+                    API_BASE_URL + API_ROUTES.WorkSchedule, {
+                    headers: API_HEADERS
+                });
                 setData(response.data);
             }catch(err){
                 console.log(err);
@@ -35,7 +39,11 @@ function WorkSchedule() {
     const handleDelete = async (id) => {
         if (window.confirm('Are you sure you want to delete this Work Schedule ?')) {
             try {
-                const response = await axios.delete(`/WorkSchedule/${id}`);
+                const response = await axios.delete(`${API_BASE_URL}WorkSchedule/${id}`,
+                {
+                    headers: API_HEADERS
+                }
+                );
                 console.log(response.data);
                 toast.success('Successfully deleted Work Schedule');
                 const updatedData = data.filter((i) => i.id !== id);

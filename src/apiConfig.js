@@ -1,5 +1,17 @@
-import axios from 'axios';
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidHJhbnRyb25ndGFuIiwianRpIjoiYzdhYTM1ZmYtYjc0NS00MDA4LWEwNTItMWZlMTkwODcxYTM3IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjpbIkFkbWluIiwiVXNlciJdLCJleHAiOjE2OTEzODMxMDEsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjcxMzEiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjUyNTkifQ.DiyTJACgH_W1eSYgy2HzzZuhKo4-ZvtSvs0ZHef-XBo';
-axios.defaults.baseURL = 'https://localhost:7131/api/';
-axios.defaults.headers.common['Content-Type'] = 'application/json';
-axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+const API_BASE_URL = "https://localhost:7131/api/"; // Thay đổi thành URL của API thực tế
+const API_ROUTES = {
+  LOGIN: "Auth/Login",
+  EMPLOYEE:"Employee",
+  TimeAttendanceManagement: "TimeAttendanceManagement",
+  SalaryBonus: "SalaryBonus",
+  WorkSchedule: "WorkSchedule",
+  Contact: "Contact",
+  // Thêm các route API khác tại đây
+};
+
+export const API_HEADERS = {
+  Authorization: `Bearer ${localStorage.getItem('token')}`,
+  'Content-Type': 'application/json',
+};
+
+export { API_BASE_URL, API_ROUTES };

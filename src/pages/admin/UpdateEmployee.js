@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import bcrypt from 'bcryptjs';
+import { API_BASE_URL, API_HEADERS } from '../../apiConfig';
+// import bcrypt from 'bcryptjs';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
@@ -19,14 +20,16 @@ function UpdateEmployee() {
         cardIssueDate: '',
         role: '',
         workShifts: '',
-        password: '',
-        newPassword: '',
-        confirmPassword: '',
+        // password: '',
+        // newPassword: '',
+        // confirmPassword: '',
     });
 
     useEffect(() => {
         axios
-            .get(`/Employee/${employeeCode}`)
+            .get(API_BASE_URL + `Employee/${employeeCode}`, {
+                headers: API_HEADERS
+            })
             .then((res) => setData(res.data))
             .catch((err) => console.log(err));
     }, [employeeCode]);
@@ -49,10 +52,10 @@ function UpdateEmployee() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (data.newPassword !== data.confirmPassword) {
-            toast.error('Mật khẩu mới không khớp. Vui lòng nhập lại mật khẩu.');
-            return;
-        }
+        // if (data.newPassword !== data.confirmPassword) {
+        //     toast.error('Mật khẩu mới không khớp. Vui lòng nhập lại mật khẩu.');
+        //     return;
+        // }
         try {
             const updateEmployeeData = {
                 employeeName: data.employeeName,
@@ -63,21 +66,24 @@ function UpdateEmployee() {
                 phoneNumber: data.phoneNumber,
                 role: data.role,
                 workShifts: data.workShifts,
-                password: data.newPassword,
+                // password: data.newPassword,
                 updatedAt: new Date()
             };
 
-            if (data.newPassword && data.newPassword === data.confirmPassword) {
-                const isOldPassword = await comparePasswords(data.oldPassword, data.password);
-                if (!isOldPassword) {
-                    toast.error('Mật khẩu cũ không khớp. Cập nhật mật khẩu thất bại.');
-                    return;
-                }
-                updateEmployeeData.newPassword = data.newPassword;
-            }
+            // if (data.newPassword && data.newPassword === data.confirmPassword) {
+            //     const isOldPassword = await comparePasswords(data.oldPassword, data.password);
+            //     if (!isOldPassword) {
+            //         toast.error('Mật khẩu cũ không khớp. Cập nhật mật khẩu thất bại.');
+            //         return;
+            //     }
+            //     updateEmployeeData.newPassword = data.newPassword;
+            // }
 
-            const response = await axios.put(`/Employee/${employeeCode}`, updateEmployeeData);
-
+            const response = await axios.put(
+                `${API_BASE_URL}Employee/${employeeCode}`,
+                updateEmployeeData,
+                { headers: API_HEADERS }
+              );
             console.log('Response:', response.data);
             toast.success('Successfully updated employee information');
         } catch (err) {
@@ -86,14 +92,14 @@ function UpdateEmployee() {
         }
     };
 
-    const comparePasswords = async (oldPassword, hashedPassword) => {
-        try {
-            return await bcrypt.compare(oldPassword, hashedPassword);
-        } catch (error) {
-            console.error('Error comparing passwords:', error);
-            return false;
-        }
-    };
+    // const comparePasswords = async (oldPassword, hashedPassword) => {
+    //     try {
+    //         // return await bcrypt.compare(oldPassword, hashedPassword);
+    //     } catch (error) {
+    //         console.error('Error comparing passwords:', error);
+    //         return false;
+    //     }
+    // };
 
     const handleCancel = () => {
         if(window.confirm('Are you sure you want to cancel ?')) {
@@ -105,14 +111,14 @@ function UpdateEmployee() {
         <Container fluid>
             <Row className='border-bottom border-dark'>
                 <Col>
-                    <h2>Chỉnh Sửa Thông Tin Nhân Viên</h2>
+                    <h2>Update Employee</h2>
                 </Col>
             </Row>
 
             <Form onSubmit={handleSubmit}>
                 <Row className="mb-3">
                     <Form.Group className="mb-3" controlId="employeeCode">
-                        <Form.Label>Mã nhân viên (*)</Form.Label>
+                        <Form.Label>Employee Code(*)</Form.Label>
                         <Form.Control
                             type="text"
                             name="employeeCode"
@@ -122,7 +128,7 @@ function UpdateEmployee() {
                         />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="employeeName">
-                        <Form.Label>Tên nhân viên (*)</Form.Label>
+                        <Form.Label>Employee Name (*)</Form.Label>
                         <Form.Control
                             type="text"
                             name="employeeName"
@@ -133,19 +139,19 @@ function UpdateEmployee() {
                     </Form.Group>
 
                     <Form.Group as={Col} controlId="gender">
-                        <Form.Label>Giới tính</Form.Label>
+                        <Form.Label>Gender</Form.Label>
                         <Form.Select
                             name="gender"
                             value={data.gender}
                             onChange={handleChange}
                         >
-                            <option value="Không xác định">Không xác định</option>
-                            <option value="Nam">Nam</option>
-                            <option value="Nữ">Nữ</option>
+                            <option value="Other">Other</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
                         </Form.Select>
                     </Form.Group>
                     <Form.Group as={Col} controlId='dateOfBirth'>
-                        <Form.Label>Ngày sinh</Form.Label>
+                        <Form.Label>Date Of Birth</Form.Label>
                         <Form.Control
                             type="date"
                             name="dateOfBirth"
@@ -157,7 +163,7 @@ function UpdateEmployee() {
                 </Row>
                 <Row>
                     <Form.Group as={Col} className="mb-3" controlId="citizenIdentificationCard">
-                        <Form.Label>Số CCCD</Form.Label>
+                        <Form.Label>Citizen Identification </Form.Label>
                         <Form.Control
                             type="text"
                             name="citizenIdentificationCard"
@@ -167,7 +173,7 @@ function UpdateEmployee() {
                         />
                     </Form.Group>
                     <Form.Group as={Col} controlId="cardIssueDate">
-                        <Form.Label>Ngày cấp</Form.Label>
+                        <Form.Label>Card Issue Date</Form.Label>
                         <Form.Control
                             type="date"
                             name="cardIssueDate"
@@ -178,7 +184,7 @@ function UpdateEmployee() {
                     </Form.Group>
                 </Row>
                 <Form.Group className="mb-3" controlId="phoneNumber">
-                    <Form.Label>Số điện thoại</Form.Label>
+                    <Form.Label>Phone Number</Form.Label>
                     <Form.Control
                         type="text"
                         name="phoneNumber"
@@ -188,7 +194,7 @@ function UpdateEmployee() {
                     />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="role">
-                    <Form.Label>Chức vụ</Form.Label>
+                    <Form.Label>Role</Form.Label>
                     <Form.Control
                         type="text"
                         name="role"
@@ -199,7 +205,7 @@ function UpdateEmployee() {
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="workShifts">
-                    <Form.Label>Ca làm việc</Form.Label>
+                    <Form.Label>Work Shifts</Form.Label>
                     <Form.Control
                         type="text"
                         name="workShifts"
@@ -241,12 +247,12 @@ function UpdateEmployee() {
                 <Row>
                     <Col>
                         <Button variant="primary" type="submit">
-                            Lưu
+                            Save
                         </Button>
                     </Col>
                     <Col>
                         <Button className='bg-danger' variant="primary" onClick={handleCancel}>
-                            Hủy
+                            Cancel
                         </Button>
                     </Col>
                 </Row>

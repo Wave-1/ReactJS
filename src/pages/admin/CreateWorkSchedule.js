@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import '../../apiConfig';
+import { API_BASE_URL, API_ROUTES, API_HEADERS } from '../../apiConfig';
 import axios from 'axios';
 
 function CreateWorkSchedule() {
@@ -50,7 +50,12 @@ function CreateWorkSchedule() {
                 createdAt: new Date(),
                 updatedAt: new Date()
             };
-            const response = await axios.post('/WorkSchedule', newWorkScheduleData);
+            const response = await axios.post(
+                API_BASE_URL + API_ROUTES.WorkSchedule, 
+                newWorkScheduleData,
+                {
+                    headers: API_HEADERS
+                });
 
             console.log('Response:', response.data);
             toast.success('Successfully added Work Schedule');

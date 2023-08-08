@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import '../../apiConfig';
+import { API_BASE_URL, API_ROUTES, API_HEADERS } from '../../apiConfig';
 import axios from 'axios';
 
 import '../../css/HoSo.css';
@@ -46,7 +46,9 @@ function CreateTimeAttendanceManagement() {
                 createdAt: new Date(),
                 updatedAt: new Date()
             };
-            const response = await axios.post('/TimeAttendanceManagement', newTimeAttendanceManagementData);
+            const response = await axios.post(API_BASE_URL + API_ROUTES.TimeAttendanceManagement, newTimeAttendanceManagementData, {
+                headers: API_HEADERS
+              });
 
             console.log('Response:', response.data);
             toast.success('Successfully added Time Attendance Management');
