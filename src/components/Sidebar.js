@@ -26,7 +26,7 @@ const Sidebar = () => {
                 <Nav.Link href='/admin/WorkSchedule' className='text-white border-bottom border-dark'>Work Schedule</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-                <Nav.Link href='/admin/LienHe' className='text-white'>Liên hệ</Nav.Link>
+                <Nav.Link href='/admin/Contact' className='text-white'>Contact</Nav.Link>
             </Nav.Item> 
             </Nav>
             

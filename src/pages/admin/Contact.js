@@ -1,27 +1,26 @@
 import React from 'react'
-import { useState, useEffect } from 'react';
 import { Container, Row, Col, Table } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
-import { toast } from 'react-toastify'
 import '../../css/HoSo.css';
+import { useState, useEffect } from 'react';
+import { toast } from 'react-toastify'
 import { API_BASE_URL, API_ROUTES, API_HEADERS } from '../../apiConfig';
 import axios from 'axios';
 import Search from '../../components/Search';
-
-function WorkSchedule() {
+import '../../css/HoSo.css';
+function Contact() {
     const [data, setData] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(
-                    API_BASE_URL + API_ROUTES.WorkSchedule, {
+                const response = await axios.get(API_BASE_URL + API_ROUTES.Contact, {
                     headers: API_HEADERS
                 });
                 setData(response.data);
-            } catch (err) {
-                console.log(err);
+            } catch (error) {
+                console.log(error);
             }
         };
         fetchData();
@@ -39,36 +38,27 @@ function WorkSchedule() {
     };
 
     const handleDelete = async (id) => {
-        if (window.confirm('Are you sure you want to delete this Work Schedule ?')) {
+        if (window.confirm('Are you sure you want to delete this Contact ?')) {
             try {
-                const response = await axios.delete(`${API_BASE_URL}WorkSchedule/${id}`,
-                    {
-                        headers: API_HEADERS
-                    }
-                );
+                const response = await axios.delete(`${API_BASE_URL}${API_ROUTES.Contact}/${id}`, {
+                    headers: API_HEADERS
+                });
                 console.log(response.data);
-                toast.success('Successfully deleted Work Schedule');
+                toast.success('Successfully deleted Contact');
                 const updatedData = data.filter((i) => i.id !== id);
                 setData(updatedData);
             } catch (err) {
-                console.error('Error deleting Work Schedule:', err);
-                toast.error('Error when deleting Work Schedule !!!');
+                console.error('Error deleting Contact:', err);
+                toast.error('Error when deleting Contact !!!');
             }
         }
     };
-
     return (
         <Container fluid>
             <Row className='border-bottom border-dark'>
-                <Col><h2>Work Schedule</h2></Col>
+                <Col><h2>Contact</h2></Col>
                 <Col>
                     <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-                </Col>
-            </Row>
-            <Row xs="auto" className='border-bottom border-dark'>
-                <Col >
-                    <img src={require('../../assets/icon-plus.png')} alt='imgPlus' style={{ width: '35px' }} />
-                    <NavLink to={'/admin/WorkSchedule/Create'}>Create</NavLink>
                 </Col>
             </Row>
             <Row>
@@ -76,10 +66,9 @@ function WorkSchedule() {
                     <thead>
                         <tr>
                             <th>Employee Code</th>
-                            <th>Work shift</th>
-                            <th>Start time</th>
-                            <th>End time</th>
-                            <th>Working day</th>
+                            <th>Employee Name</th>
+                            <th>Email</th>
+                            <th>Content</th>
                             <th>Created at</th>
                             <th>Updated at</th>
                             <th>Actions</th>
@@ -90,23 +79,22 @@ function WorkSchedule() {
                             .filter((employee) =>
                                 searchTerm.toLowerCase() === '' ||
                                 (employee.employeeCode && employee.employeeCode.toString().toLowerCase().includes(searchTerm.toString().toLowerCase())) ||
-                                (employee.workShifts && employee.workShifts .toString().toLowerCase().includes(searchTerm.toString().toLowerCase()))
+                                (employee.employeeName && employee.employeeName.toLowerCase().includes(searchTerm.toLowerCase()))
                             )
-                            .map(workSchedule => {
+                            .map(i => {
                                 return (
-                                    <tr key={workSchedule.id}>
-                                        <td>{workSchedule.employeeCode}</td>
-                                        <td>{workSchedule.workShifts}</td>
-                                        <td>{workSchedule.startTime}</td>
-                                        <td>{workSchedule.endTime}</td>
-                                        <td>{formatDateForInput(workSchedule.workingDay)}</td>
-                                        <td>{formatDateForInput(workSchedule.createdAt)}</td>
-                                        <td>{formatDateForInput(workSchedule.updatedAt)}</td>
+                                    <tr key={i.id}>
+                                        <td>{i.employeeCode}</td>
+                                        <td>{i.employeeName}</td>
+                                        <td>{i.email}</td>
+                                        <td className="truncate-text">{i.content}</td>
+                                        <td>{formatDateForInput(i.createdAt)}</td>
+                                        <td>{formatDateForInput(i.updatedAt)}</td>
                                         <td>
-                                            <NavLink to={`/admin/WorkSchedule/Update/${workSchedule.id}`} >
-                                                <img src={require('../../assets/icon-edit-1.png')} alt='imgedit' style={{ width: '35px', marginRight: '10px' }} />
+                                            <NavLink to={`/admin/Contact/SeeContact/${i.id}`} >
+                                                <img src={require('../../assets/icon-Vector.png')} alt='imgedit' style={{ width: '25px', marginRight: '20px' }} />
                                             </NavLink>
-                                            <NavLink onClick={() => handleDelete(workSchedule.id)}>
+                                            <NavLink onClick={() => handleDelete(i.id)}>
                                                 <img src={require('../../assets/icon-delete-1.png')} alt='imgdelete' style={{ width: '15px' }} />
                                             </NavLink>
                                         </td>
@@ -119,5 +107,4 @@ function WorkSchedule() {
         </Container>
     )
 }
-export default WorkSchedule
-
+export default Contact

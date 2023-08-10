@@ -26,26 +26,30 @@ const Login = () => {
             if (responseData.success) {
                 // Lưu token vào localStorage
                 localStorage.setItem('token', responseData.data);
-          
+
                 // Giải mã token để lấy thông tin role
                 const decodedToken = jwtDecode(responseData.data);
                 console.log(decodedToken);
                 const role = decodedToken.role;
-          
+                const employeeName = decodedToken.EmployeeName;
                 // Kiểm tra role và chuyển hướng vào trang tương ứng
                 if (role === "Admin") {
-                  toast.success('Đăng nhập thành công (Admin)');
+                  toast.success('Logged in successfully (Admin)');
                   sessionStorage.setItem('EmployeeCode', employeeCode);
                   sessionStorage.setItem('userRole', 'Admin');
                   navigate('/admin');
                 } else {
-                  toast.success('Đăng nhập thành công (User)');
+                  toast.success('Logged in successfully');
                   sessionStorage.setItem('EmployeeCode', employeeCode);
+                  sessionStorage.setItem('EmployeeName', employeeName);
                   sessionStorage.setItem('userRole', 'User');
                   navigate('/user');
                 }
-              }
+            }else{
+                toast.error('Incorrect account or password !!!');
+            }
           } catch (err) {
+            toast.error('Incorrect account or password !!!');
             console.error(err);
           }
         }
@@ -73,14 +77,14 @@ const Login = () => {
             <Card className="shadow">
               <Card.Body>
                 <div className="mb-3 mt-md-4">
-                  <h2 className="fw-bold mb-5 text-center">ĐĂNG NHẬP</h2>
+                  <h2 className="fw-bold mb-5 text-center">Login</h2>
                   <div className="mb-3">
                     <Form 
                     onSubmit={handleSubmit}
                     >
                       <Form.Group className="mb-5" controlId="formBasicEmail">
                         <Form.Control
-                          placeholder="Nhập tài khoản"
+                          placeholder="EmployeeCode"
                           className='rounded'
                           value={employeeCode}
                           onChange={(e) => setEmployeeCode(e.target.value)}
@@ -90,14 +94,14 @@ const Login = () => {
                       <Form.Group className="mb-5" controlId="formBasicPassword">
                         <Form.Control
                           type="Password"
-                          placeholder="Nhập mật khẩu"
+                          placeholder="Password"
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
                         />
                       </Form.Group>
                       <div className="d-grid">
                         <Button variant="primary" type="submit" className='bg-black'>
-                          Đăng nhập 
+                          Login
                         </Button>
                       </div>
                     </Form>

@@ -10,16 +10,17 @@ import SalaryBonus from '../pages/admin/SalaryBonus';
 import WorkSchedule from '../pages/admin/WorkSchedule';
 import CreateWorkSchedule from '../pages/admin/CreateWorkSchedule';
 import UpdateWorkSchedule from '../pages/admin/UpdateWorkSchedule';
-import LienHe from '../pages/admin/LienHe';
+import Contact from '../pages/admin/Contact';
+import SeeContact from '../pages/admin/SeeContact';
 import CreateEmployee from '../pages/admin/CreateEmployee';
 import UpdateEmployee from '../pages/admin/UpdateEmployee';
 import TimeAttendance from '../pages/user/TimeAttendance';
-import ThongTinNhanVienUser from '../pages/user/ThongTinNhanVien';
+import EmployeeInformation from '../pages/user/EmployeeInformation';
+// import EmployeeEdit from '../pages/user/EmployeeEdit';
 import UserTimeAttendanceManagement from '../pages/user/UserTimeAttendanceManagement';
 import ThuongUser from '../pages/user/ThuongUser';
-import LichLamViecUser from '../pages/user/LichLamViec';
-import LienHeUser from '../pages/user/LienHe';
-import SuaUser from '../pages/user/SuaUser';
+import UserWorkSchedule from '../pages/user/UserWorkSchedule';
+import UserContact from '../pages/user/UserContact';
 
 
 export const AdminRoutes = () => (
@@ -34,9 +35,10 @@ export const AdminRoutes = () => (
       <Route path="WorkSchedule" element={<WorkSchedule/>} />
       <Route path="WorkSchedule/Create" element={<CreateWorkSchedule/>} />
       <Route path="WorkSchedule/Update/:id" element={<UpdateWorkSchedule/>} />
-      <Route path="LienHe" element={<LienHe />} />
-      <Route path="HoSo/Create" element={<CreateEmployee />} />
-      <Route path="HoSo/Update/:employeeCode" element={<UpdateEmployee />} />
+      <Route path="Contact" element={<Contact />} />
+      <Route path="Contact/SeeContact/:id" element={<SeeContact />} />
+      <Route path="Employee/Create" element={<CreateEmployee />} />
+      <Route path="Employee/Update/:employeeCode" element={<UpdateEmployee />} />
     </Route>
   </Routes>
 );
@@ -45,12 +47,12 @@ export const UserRoutes = () => (
   <Routes>
     <Route path="/" element={<HomeUser />}>
       <Route index element={<TimeAttendance/>} />
-      <Route path="ThongTinNhanVienUser" element={<ThongTinNhanVienUser />} />
+      <Route path="EmployeeInformation" element={<EmployeeInformation />} />
+      {/* <Route path="EmployeeInformation/EmployeeEdit" element={<EmployeeEdit />} /> */}
       <Route path="TimeAttendanceManagement" element={<UserTimeAttendanceManagement />} />
       <Route path="ThuongUser" element={<ThuongUser />} />
-      <Route path="LichLamViecUser" element={<LichLamViecUser />} />
-      <Route path="LienHeUser" element={<LienHeUser />} />
-      <Route path="ThongTinNhanVien/SuaUser" element={<SuaUser />} />
+      <Route path="UserWorkSchedule" element={<UserWorkSchedule />} />
+      <Route path="UserContact" element={<UserContact/>} />
     </Route>
   </Routes>
 );

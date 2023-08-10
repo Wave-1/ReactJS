@@ -14,7 +14,7 @@ const Sidebar_user = () => {
                 <p>Menu</p>
             </div>
             <Nav.Item>
-                <Nav.Link href='/user/ThongTinNhanVienUser' className='text-white border-bottom border-dark'>Thông tin nhân viên</Nav.Link>
+                <Nav.Link href='/user/EmployeeInformation' className='text-white border-bottom border-dark'>Employee Information</Nav.Link>
             </Nav.Item>
             <Nav.Item>
                 <Nav.Link href='/user/TimeAttendanceManagement' className='text-white border-bottom border-dark'>Time Attendance Management</Nav.Link>
@@ -23,10 +23,10 @@ const Sidebar_user = () => {
                 <Nav.Link href='/user/ThuongUser' className='text-white border-bottom border-dark'>Thưởng</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-                <Nav.Link href='/user/LichLamViecUser' className='text-white border-bottom border-dark'>Lich làm việc</Nav.Link>
+                <Nav.Link href='/user/UserWorkSchedule' className='text-white border-bottom border-dark'>Work Schedule</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-                <Nav.Link href='/user/LienHeUser' className='text-white'>Liên hệ</Nav.Link>
+                <Nav.Link href='/user/UserContact' className='text-white'>Contact</Nav.Link>
             </Nav.Item> 
             </Nav>
             

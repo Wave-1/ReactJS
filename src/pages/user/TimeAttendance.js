@@ -12,8 +12,7 @@ function TimeAttendance() {
     const [employeeCode, setEmployeeCode] = useState('');
     const [date, setDate] = useState(new Date().toLocaleDateString());
     const [time, setTime] = useState(new Date().toLocaleTimeString());
-    const [setCheckinTime] = useState(null);
-
+    const [checkinTime, setCheckinTime] = useState(null);
     useEffect(() => {
         const loggedInEmployeeCode = sessionStorage.getItem('EmployeeCode');
         if (loggedInEmployeeCode) {
@@ -37,29 +36,38 @@ function TimeAttendance() {
         const formattedCheckinTime = moment(currentTime).format('YYYY-MM-DD HH:mm:ss');
         const formattedWorkingDay = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
         const createdAt = moment().format('YYYY-MM-DDTHH:mm:ss.SSS[Z]');
-
-        const existingDataResponse = await axios.get(`${API_BASE_URL}${API_ROUTES.TimeAttendanceManagement}?employeeCode=${employeeCode}&workingDay=${formattedWorkingDay}`,
-        { headers: API_HEADERS }
-        );
-
-        const existingData = existingDataResponse.data.find(row => (row.checkIn !== null && row.checkOut === null) || (row.checkIn !== null && row.checkOut !== null));
-        console.log(existingData);
-        console.log(employeeCode);
-
-        if (!existingData) {
-            const data = {
-                EmployeeCode: employeeCode,
-                CheckIn: formattedCheckinTime,
-                CheckOut: null,
-                WorkingDay: formattedWorkingDay,
-                CreatedAt: createdAt
-            };
-            const response = await axios.post(API_BASE_URL + API_ROUTES.TimeAttendanceManagement, data,
+    
+        try {
+            const existingDataResponse = await axios.get(`${API_BASE_URL}${API_ROUTES.TimeAttendanceManagement}?employeeCode=${employeeCode}&workingDay=${formattedWorkingDay}`,
             { headers: API_HEADERS }
             );
-            setCheckinTime(response.data.checkIn);
+    
+            const existingData = existingDataResponse.data.find(row => (row.checkIn !== null && row.checkOut === null) || (row.checkIn !== null && row.checkOut !== null));
+            console.log(existingData);
+            console.log(employeeCode);
+    
+            if (!existingData) {
+                const data = {
+                    EmployeeCode: employeeCode,
+                    CheckIn: formattedCheckinTime,
+                    CheckOut: null,
+                    WorkingDay: formattedWorkingDay,
+                    CreatedAt: createdAt
+                };
+                const response = await axios.post(API_BASE_URL + API_ROUTES.TimeAttendanceManagement, data,
+                { headers: API_HEADERS }
+                );
+                setCheckinTime(response.data.checkIn);
+            } else {
+                console.log("Dữ liệu đã tồn tại");
+                // Xử lý khi dữ liệu đã tồn tại, ví dụ: thông báo lỗi hoặc hiển thị thông tin đã check in
+            }
+        } catch (error) {
+            console.error("Error during check-in:", error);
+            // Xử lý lỗi, ví dụ: thông báo lỗi hoặc hiển thị thông tin lỗi
         }
     }
+    
 
     const handleCheckOut = async () => {
         setCheckedIn(false);

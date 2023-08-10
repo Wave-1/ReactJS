@@ -4,3 +4,10 @@
 .table-striped>tbody>tr:nth-of-type(odd)>*{
     background-color: #F5EFEF;    
 }
+
+.truncate-text {
+    white-space: nowrap;          /* Ngăn chặn xuống dòng */
+    overflow: hidden;             /* Ẩn nội dung dư thừa */
+    text-overflow: ellipsis;      /* Hiển thị dấu "..." khi nội dung bị cắt */
+    max-width: 200px;             /* Đặt chiều rộng tối đa của nội dung */
+  }

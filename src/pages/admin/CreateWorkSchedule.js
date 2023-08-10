@@ -8,6 +8,7 @@ import axios from 'axios';
 function CreateWorkSchedule() {
     const [validated, setValidated] = useState(false);
     const navigate = useNavigate();
+
     const [data, setData] = useState({
         employeeCode: '',
         workShifts: '',
