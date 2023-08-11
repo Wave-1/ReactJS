@@ -61,7 +61,7 @@ function UserTimeAttendanceManagement() {
                     );
                     const existingIncomeData = incomeResponse.data;
                     console.log(existingIncomeData)
-                    if (existingIncomeData === 0) {
+                    if (existingIncomeData == 0) {
                         try {
                             const data = {
                                 EmployeeCode: employeeCodeToUpdate,

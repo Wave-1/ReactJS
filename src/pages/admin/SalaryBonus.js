@@ -47,7 +47,7 @@ function Thuong() {
                         await axios.post(`${API_BASE_URL}${API_ROUTES.SalaryBonus}`, newBonus, { headers: API_HEADERS });
                         console.log('post tc')
                         break; // Kết thúc vòng lặp sau khi tạo một hàng dữ liệu mới
-                    }
+                    }//queen ham put :)))
                 }
     
                 // Lấy dữ liệu từ bảng SalaryBonus sau khi đã tạo mới
