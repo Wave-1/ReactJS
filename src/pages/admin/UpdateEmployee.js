@@ -121,9 +121,9 @@ function UpdateEmployee() {
                             value={data.gender}
                             onChange={handleChange}
                         >
-                            <option value="Other">Other</option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
+                            <option value="Other">Other</option>
                         </Form.Select>
                     </Form.Group>
                     <Form.Group as={Col} controlId='dateOfBirth'>
@@ -170,16 +170,16 @@ function UpdateEmployee() {
                     />
                 </Form.Group>
                 <Form.Group as={Col} controlId="role">
-                        <Form.Label>Chức vụ</Form.Label>
+                        <Form.Label>Role</Form.Label>
                         <Form.Select
                             type="text"
                             name="role"
                             value={data?.role}
                             onChange={handleChange}
                         >
-                            <option value="admin">admin</option>
-                            <option value="manage">manage</option>
-                            <option value="employee">employee</option>
+                        <option value="Manage" selected>Manage</option>
+                        <option value="Employee">Employee</option>
+                        <option value="Admin" >Admin</option>
                         </Form.Select>
                     </Form.Group>
 

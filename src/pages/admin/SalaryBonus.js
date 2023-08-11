@@ -91,12 +91,12 @@ function Thuong() {
                 <Table striped bordered hover>
                     <thead>
                         <tr>
-                            <th>EmployeeCode</th>
-                            <th>EmployeeName</th>
+                            <th>Employee Code</th>
+                            <th>Employee Name</th>
                             <th>Role</th>
-                            <th>WorkingHoursCompleted</th>
-                            <th>SalaryBonus</th>
-                            <th>TotalIncome</th>
+                            <th>Working Hours Completed</th>
+                            <th>Salary Bonus</th>
+                            <th>Total Income</th>
                             <th>Note</th>
                             <th>Actions</th>
                         </tr>

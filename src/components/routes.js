@@ -19,7 +19,7 @@ import TimeAttendance from '../pages/user/TimeAttendance';
 import EmployeeInformation from '../pages/user/EmployeeInformation';
 // import EmployeeEdit from '../pages/user/EmployeeEdit';
 import UserTimeAttendanceManagement from '../pages/user/UserTimeAttendanceManagement';
-import ThuongUser from '../pages/user/ThuongUser';
+import UserSalaryBonus from '../pages/user/UserSalaryBonus';
 import UserWorkSchedule from '../pages/user/UserWorkSchedule';
 import UserContact from '../pages/user/UserContact';
 
@@ -52,7 +52,7 @@ export const UserRoutes = () => (
       <Route path="EmployeeInformation" element={<EmployeeInformation />} />
       {/* <Route path="EmployeeInformation/EmployeeEdit" element={<EmployeeEdit />} /> */}
       <Route path="TimeAttendanceManagement" element={<UserTimeAttendanceManagement />} />
-      <Route path="ThuongUser" element={<ThuongUser />} />
+      <Route path="UserSalaryBonus" element={<UserSalaryBonus />} />
       <Route path="UserWorkSchedule" element={<UserWorkSchedule />} />
       <Route path="UserContact" element={<UserContact/>} />
     </Route>

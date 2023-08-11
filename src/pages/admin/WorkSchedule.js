@@ -90,7 +90,7 @@ function WorkSchedule() {
                             .filter((employee) =>
                                 searchTerm.toLowerCase() === '' ||
                                 (employee.employeeCode && employee.employeeCode.toString().toLowerCase().includes(searchTerm.toString().toLowerCase())) ||
-                                (employee.workShifts && employee.workShifts .toString().toLowerCase().includes(searchTerm.toString().toLowerCase()))
+                                (employee.workShifts && employee.workShifts.toLowerCase().includes(searchTerm.toLowerCase()))
                             )
                             .map(workSchedule => {
                                 return (

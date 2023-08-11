@@ -61,7 +61,7 @@ function UserTimeAttendanceManagement() {
                     );
                     const existingIncomeData = incomeResponse.data;
                     console.log(existingIncomeData)
-                    if (existingIncomeData == 0) {
+                    if (existingIncomeData === 0) {
                         try {
                             const data = {
                                 EmployeeCode: employeeCodeToUpdate,
@@ -112,7 +112,7 @@ function UserTimeAttendanceManagement() {
     return (
         <Container fluid>
             <Row className='border-bottom border-dark'>
-                <Col><h2>Lịch sử chấm công</h2></Col>
+                <Col><h2>Timekeeping history</h2></Col>
             </Row>
             <Row>
                 <Table striped bordered hover >
@@ -122,7 +122,7 @@ function UserTimeAttendanceManagement() {
                         <th>Check in</th>
                         <th>Check out</th>
                         <th>Working day</th>
-                        <th>Số phút làm việc</th>
+                        <th>Working minutes</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -133,15 +133,15 @@ function UserTimeAttendanceManagement() {
 
                     let formattedTime = '';
                     if (hours > 0) {
-                        formattedTime += `${hours}giờ`;
+                        formattedTime += `${hours} hours`;
                     }
                     if (minutes > 0) {
                         if (formattedTime !== '') {
                             formattedTime += ' ';
                         }
-                        formattedTime += `${minutes}phút`;
+                        formattedTime += `${minutes} minutes`;
                     }if (totalMinutes === 0) {
-                        formattedTime = '0 phút';
+                        formattedTime = '0 minutes';
                     }
 
                     return (
@@ -160,7 +160,7 @@ function UserTimeAttendanceManagement() {
             </Row>
             <Row>
                 <Col>
-                <NavLink to ='/user' >Chấm công</NavLink>
+                <NavLink to ='/user' >Time Attendance</NavLink>
                 </Col>
             </Row>
         </Container>

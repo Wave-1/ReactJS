@@ -1,10 +1,9 @@
-
-import {Container, Row, Col, Table} from 'react-bootstrap';
+import { Container, Row, Col, Table } from 'react-bootstrap';
 import '../../css/HoSo.css';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { API_BASE_URL, API_HEADERS, API_ROUTES } from '../../apiConfig';
-function ThuongUser() {
+function UserSalaryBonus() {
     const [employeeCode, setEmployeeCode] = useState('');
     const [employeeData, setEmployeeData] = useState([]);
     const [incomeData, setIncomeData] = useState([]);
@@ -12,9 +11,9 @@ function ThuongUser() {
 
     useEffect(() => {
         async function fetchData() {
-            const loggedInEmployeeCode = sessionStorage.getItem('EmployeeCode');
-            if (loggedInEmployeeCode) {
-                setEmployeeCode(loggedInEmployeeCode);
+            const lemployeeCode = sessionStorage.getItem('EmployeeCode');
+            if (lemployeeCode) {
+                setEmployeeCode(lemployeeCode);
             }
             try {
                 // Lấy dữ liệu từ bảng Employee dựa trên employeeCode
@@ -31,7 +30,7 @@ function ThuongUser() {
                 );
                 const newIncomeData = incomeResponse.data;
                 setIncomeData(newIncomeData);
-                
+
 
                 if (newIncomeData.length > 0) {
                     // Lấy dữ liệu từ bảng SalaryBonus dựa trên [IncomeID] = [ID].[Income]
@@ -46,7 +45,7 @@ function ThuongUser() {
 
             } catch (error) {
                 console.error('Error:', error);
-            }   
+            }
         }
 
         fetchData();
@@ -55,40 +54,40 @@ function ThuongUser() {
     return (
         <Container fluid>
             <Row className='border-bottom border-dark'>
-                <Col><h2>Lương</h2></Col>
+                <Col><h2>Salary Bonus</h2></Col>
             </Row>
             <Row>
                 <Table striped bordered hover>
                     <thead>
                         <tr>
-                            <th>EmployeeCode</th>
-                            <th>employeeName</th>
+                            <th>Employee Code</th>
+                            <th>Employee Name</th>
                             <th>Role</th>
-                            <th>WorkingHoursCompleted</th>
-                            <th>SalaryBonus</th>
-                            <th>TotalIncome</th>
+                            <th>Working Hours Completed</th>
+                            <th>Salary Bonus</th>
+                            <th>Total Income</th>
                             <th>Note</th>
                         </tr>
                     </thead>
                     <tbody>
-{employeeData.map((employeeItem, index) => {
-    const matchingIncome = incomeData.find(incomeItem => incomeItem.employeeCode === employeeItem.employeeCode);
-    console.log('bonusData', bonusData);
-    const matchingBonus = bonusData[1]; // Lấy dòng thứ hai của mảng bonusData
-    
-    return (
-        <tr key={index}>
-            <td>{employeeItem.employeeCode}</td>
-            <td>{employeeItem.employeeName}</td>
-            <td>{employeeItem.role}</td>
-            <td>{matchingIncome ? matchingIncome.workingHoursCompleted : null}</td>
-            <td>{matchingBonus ? matchingBonus.salaryBonus : null}</td>
-            <td>{matchingIncome ? matchingIncome.totalIncome : null}</td>
-            <td>{matchingBonus ? matchingBonus.note : null}</td>
-        </tr>
-    );
-})}
-</tbody>
+                        {employeeData.map((employeeItem, index) => {
+                            const matchingIncome = incomeData.find(incomeItem => incomeItem.employeeCode === employeeItem.employeeCode);
+                            console.log('bonusData', bonusData);
+                            const matchingBonus = bonusData[1]; // Lấy dòng thứ hai của mảng bonusData
+
+                            return (
+                                <tr key={index}>
+                                    <td>{employeeItem.employeeCode}</td>
+                                    <td>{employeeItem.employeeName}</td>
+                                    <td>{employeeItem.role}</td>
+                                    <td>{matchingIncome ? matchingIncome.workingHoursCompleted : null}</td>
+                                    <td>{matchingBonus ? matchingBonus.salaryBonus : null}</td>
+                                    <td>{matchingIncome ? matchingIncome.totalIncome : null}</td>
+                                    <td>{matchingBonus ? matchingBonus.note : null}</td>
+                                </tr>
+                            );
+                        })}
+                    </tbody>
 
                 </Table>
             </Row>
@@ -96,4 +95,4 @@ function ThuongUser() {
     );
 }
 
-export default ThuongUser
+export default UserSalaryBonus

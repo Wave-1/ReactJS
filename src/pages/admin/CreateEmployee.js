@@ -73,7 +73,7 @@ function CreateEmployee() {
             };
             const response = await axios.post(API_BASE_URL + API_ROUTES.EMPLOYEE, newEmployeeData, {
                 headers: API_HEADERS
-              });
+            });
 
             console.log('Response:', response.data);
             toast.success('Successfully added employees');
@@ -95,7 +95,7 @@ function CreateEmployee() {
         <Container fluid>
             <Row className='border-bottom border-dark'>
                 <Col>
-                    <h2>Update Employee</h2>
+                    <h2>Create Employee</h2>
                 </Col>
             </Row>
 
@@ -128,9 +128,9 @@ function CreateEmployee() {
                             value={data.gender}
                             onChange={handleChange}
                         >
-                            <option value="Other">Other</option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
+                            <option value="Other">Other</option>
                         </Form.Select>
                     </Form.Group>
                     <Form.Group as={Col} controlId='dateOfBirth'>
@@ -187,18 +187,18 @@ function CreateEmployee() {
                     />
                 </Form.Group> */}
                 <Form.Group as={Col} controlId="role">
-                        <Form.Label>Chức vụ</Form.Label>
-                        <Form.Select
-                            type="text"
-                            name="role"
-                            value={data?.role}
-                            onChange={handleChange}
-                        >
-                            <option value="admin">admin</option>
-                            <option value="manage">manage</option>
-                            <option value="employee">employee</option>
-                        </Form.Select>
-                    </Form.Group>
+                    <Form.Label>Role</Form.Label>
+                    <Form.Select
+                        type="text"
+                        name="role"
+                        value={data?.role}
+                        onChange={handleChange}
+                    >
+                        <option value="Manage" selected>Manage</option>
+                        <option value="Employee">Employee</option>
+                        <option value="Admin" >Admin</option>
+                    </Form.Select>
+                </Form.Group>
                 <Form.Group className="mb-3" controlId="workShifts">
                     <Form.Label>Work Shifts</Form.Label>
                     <Form.Control
@@ -211,7 +211,7 @@ function CreateEmployee() {
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="password">
-                    <Form.Label>Mật khẩu (*)</Form.Label>
+                    <Form.Label>Password (*)</Form.Label>
                     <Form.Control type="password"
                         name="password"
                         onChange={handleChange}
@@ -221,7 +221,7 @@ function CreateEmployee() {
 
                 <Row className="mb-3">
                     <Form.Group as={Col} controlId="confirmPassword">
-                        <Form.Label>Nhập lại mật khẩu (*)</Form.Label>
+                        <Form.Label>Confirm Password (*)</Form.Label>
                         <Form.Control
                             type="password"
                             name="confirmPassword"
@@ -233,12 +233,12 @@ function CreateEmployee() {
                 <Row>
                     <Col>
                         <Button variant="primary" type="submit">
-                            Lưu
+                            Save
                         </Button>
                     </Col>
                     <Col>
                         <Button className='bg-danger' variant="primary" onClick={handleCancel}>
-                            Hủy
+                            Cancel
                         </Button>
                     </Col>
                 </Row>
