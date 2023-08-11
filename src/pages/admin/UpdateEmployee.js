@@ -20,9 +20,6 @@ function UpdateEmployee() {
         cardIssueDate: '',
         role: '',
         workShifts: '',
-        // password: '',
-        // newPassword: '',
-        // confirmPassword: '',
     });
 
     useEffect(() => {
@@ -52,10 +49,6 @@ function UpdateEmployee() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // if (data.newPassword !== data.confirmPassword) {
-        //     toast.error('Mật khẩu mới không khớp. Vui lòng nhập lại mật khẩu.');
-        //     return;
-        // }
         try {
             const updateEmployeeData = {
                 employeeName: data.employeeName,
@@ -70,14 +63,6 @@ function UpdateEmployee() {
                 updatedAt: new Date()
             };
 
-            // if (data.newPassword && data.newPassword === data.confirmPassword) {
-            //     const isOldPassword = await comparePasswords(data.oldPassword, data.password);
-            //     if (!isOldPassword) {
-            //         toast.error('Mật khẩu cũ không khớp. Cập nhật mật khẩu thất bại.');
-            //         return;
-            //     }
-            //     updateEmployeeData.newPassword = data.newPassword;
-            // }
 
             const response = await axios.put(
                 `${API_BASE_URL}Employee/${employeeCode}`,
@@ -91,15 +76,6 @@ function UpdateEmployee() {
             toast.error('Error when updating employee information');
         }
     };
-
-    // const comparePasswords = async (oldPassword, hashedPassword) => {
-    //     try {
-    //         // return await bcrypt.compare(oldPassword, hashedPassword);
-    //     } catch (error) {
-    //         console.error('Error comparing passwords:', error);
-    //         return false;
-    //     }
-    // };
 
     const handleCancel = () => {
         if(window.confirm('Are you sure you want to cancel ?')) {
@@ -193,16 +169,19 @@ function UpdateEmployee() {
                         required
                     />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="role">
-                    <Form.Label>Role</Form.Label>
-                    <Form.Control
-                        type="text"
-                        name="role"
-                        value={data?.role}
-                        onChange={handleChange}
-                        required
-                    />
-                </Form.Group>
+                <Form.Group as={Col} controlId="role">
+                        <Form.Label>Chức vụ</Form.Label>
+                        <Form.Select
+                            type="text"
+                            name="role"
+                            value={data?.role}
+                            onChange={handleChange}
+                        >
+                            <option value="admin">admin</option>
+                            <option value="manage">manage</option>
+                            <option value="employee">employee</option>
+                        </Form.Select>
+                    </Form.Group>
 
                 <Form.Group className="mb-3" controlId="workShifts">
                     <Form.Label>Work Shifts</Form.Label>
@@ -214,36 +193,6 @@ function UpdateEmployee() {
                         required
                     />
                 </Form.Group>
-
-                {/* <Form.Group className="mb-3" controlId="oldPassword">
-                    <Form.Label>Mật khẩu cũ (*)</Form.Label>
-                    <Form.Control type="password"
-                        name="oldPassword"
-                        onChange={handleChange}
-                        required
-                    />
-                </Form.Group> */}
-
-                {/* <Row className="mb-3">
-                    <Form.Group as={Col} controlId="newPassword">
-                        <Form.Label>Mật khẩu mới (*)</Form.Label>
-                        <Form.Control type="password"
-                            name="newPassword"
-                            onChange={handleChange}
-                            required
-                        />
-                    </Form.Group>
-
-                    <Form.Group as={Col} controlId="confirmPassword">
-                        <Form.Label>Nhập lại mật khẩu mới (*)</Form.Label>
-                        <Form.Control
-                            type="password"
-                            name="confirmPassword"
-                            onChange={handleChange}
-                            required
-                        />
-                    </Form.Group>
-                </Row> */}
                 <Row>
                     <Col>
                         <Button variant="primary" type="submit">

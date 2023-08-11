@@ -129,30 +129,33 @@ function EmployeeInformation() {
                         <Form.Control
                             type="text"
                             name="employeeName"
-                            defaultValue={data.employeeName}
-                            disabled
+                            value={data.employeeName}
+                            onChange={handleChange}
+                            required
                         />
                     </Form.Group>
                     
                     <Form.Group as={Col} controlId="gender">
                         <Form.Label>Gender</Form.Label>
-                        <Form.Select
+                        <Form.Control
+                            as="select"
                             name="gender"
-                            defaultValue={data.gender}
-                            disabled
+                            value={data.gender}
+                            onChange={handleChange}
                         >
-                            <option defaultValue="Other">Other</option>
-                            <option defaultValue="Male">Male</option>
-                            <option defaultValue="Female">Female</option>
-                        </Form.Select>
+                            <option value="Other">Other</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </Form.Control>
                     </Form.Group>
                     <Form.Group as={Col} controlId='dateOfBirth'>
                         <Form.Label>Date Of Birth</Form.Label>
                         <Form.Control
                             type="date"
                             name="dateOfBirth"
-                            defaultValue={formatDateForInput(data?.dateOfBirth)}
-                            disabled
+                            value={formatDateForInput(data?.dateOfBirth)}
+                            onChange={handleChange}
+                            required
                         />
                     </Form.Group>
                 </Row>

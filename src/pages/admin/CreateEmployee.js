@@ -47,6 +47,16 @@ function CreateEmployee() {
                 toast.error('Mật khẩu không trùng khớp.');
                 return;
             }
+            // Kiểm tra trùng lặp Employee Code
+            const existingEmployee = await axios.get(API_BASE_URL + API_ROUTES.EMPLOYEE, {
+                params: { employeeCode: data.employeeCode },
+                headers: API_HEADERS
+            });
+
+            if (existingEmployee.data.length > 0) {
+                toast.error('Employee Code đã tồn tại.');
+                return;
+            }
             const newEmployeeData = {
                 employeeCode: data.employeeCode,
                 employeeName: data.employeeName,
@@ -166,7 +176,7 @@ function CreateEmployee() {
                         required
                     />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="role">
+                {/* <Form.Group className="mb-3" controlId="role">
                     <Form.Label>Role</Form.Label>
                     <Form.Control
                         type="text"
@@ -175,8 +185,20 @@ function CreateEmployee() {
                         onChange={handleChange}
                         required
                     />
-                </Form.Group>
-
+                </Form.Group> */}
+                <Form.Group as={Col} controlId="role">
+                        <Form.Label>Chức vụ</Form.Label>
+                        <Form.Select
+                            type="text"
+                            name="role"
+                            value={data?.role}
+                            onChange={handleChange}
+                        >
+                            <option value="admin">admin</option>
+                            <option value="manage">manage</option>
+                            <option value="employee">employee</option>
+                        </Form.Select>
+                    </Form.Group>
                 <Form.Group className="mb-3" controlId="workShifts">
                     <Form.Label>Work Shifts</Form.Label>
                     <Form.Control

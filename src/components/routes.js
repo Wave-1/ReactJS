@@ -7,6 +7,7 @@ import TimeAttendanceManagement from '../pages/admin/TimeAttendanceManagement';
 import CreateTimeAttendanceManagement from '../pages/admin/CreateTimeAttendanceManagement';
 import UpdateTimeAttendanceManagement from '../pages/admin/UpdateTimeAttendanceManagement';
 import SalaryBonus from '../pages/admin/SalaryBonus';
+import UpdateSalaryBonus from '../pages/admin/UpdateSalaryBonus';
 import WorkSchedule from '../pages/admin/WorkSchedule';
 import CreateWorkSchedule from '../pages/admin/CreateWorkSchedule';
 import UpdateWorkSchedule from '../pages/admin/UpdateWorkSchedule';
@@ -32,6 +33,7 @@ export const AdminRoutes = () => (
       <Route path="TimeAttendanceManagement/Create" element={<CreateTimeAttendanceManagement/>}/>
       <Route path="TimeAttendanceManagement/Update/:id" element={<UpdateTimeAttendanceManagement/>} />
       <Route path="SalaryBonus" element={<SalaryBonus/>} />
+      <Route path="SalaryBonus/Update/:id" element={<UpdateSalaryBonus/>} />
       <Route path="WorkSchedule" element={<WorkSchedule/>} />
       <Route path="WorkSchedule/Create" element={<CreateWorkSchedule/>} />
       <Route path="WorkSchedule/Update/:id" element={<UpdateWorkSchedule/>} />
